@@ -1,0 +1,12 @@
+name: EpiViz
+title: EpiViz
+username:
+account: mattlee
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1776688
+bundleId: 2782178
+url: https://mattlee.shinyapps.io/EpiViz/
+when: 1581076595.77261
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,10 @@
+name: 011_mr_viz
+title:
+username:
+account: mattlee
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1615797
+bundleId: 2782160
+url: https://mattlee.shinyapps.io/011_mr_viz/
+when: 1581075690.57434

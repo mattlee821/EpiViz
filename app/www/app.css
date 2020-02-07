@@ -1,0 +1,129 @@
+body {
+  background-color: #fafafa;
+}
+
+#header {
+  text-align: center;
+  color: #fdfdfd;
+  text-shadow: 0 0 1px #000;
+  padding: 30px 0 45px;
+  border-bottom: 1px solid #ddd;
+  margin: -20px -30px 20px;
+  background: url('header.jpg');
+}
+
+#title {
+  font-size: 5em;
+  text-shadow: 0 0 5px #000;
+  margin-bottom: -5px
+}
+
+#subsubtitle {
+  font-size: 1.6em;
+}
+
+#subsubtitle a {
+  color: #ffffb3;
+}
+
+#subsubtitle a:hover {
+  color: #ffff66;
+  text-decoration: underline;
+}
+
+.well {
+  font-size: 1.2em;
+  background-color: #fff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.well #T1, #T2, #T3 {
+  font-size: 1em;
+  background-color: LightGray;
+  margin-top: 5;
+  margin-bottom: 5px;
+}
+
+.well .shiny-input-container {
+  width: 300px;
+}
+
+#lpInData .shiny-input-container {
+  width: auto;
+}
+
+pre {
+  max-width: 700px;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  border-top: 2px solid gold;
+  border-bottom: 0;
+  font-weight: bold;
+}
+
+.nav-tabs>li {
+  margin-left: 7px;
+}
+
+.nav-tabs>li>a {
+  background-color: #f8f8f8;
+  border: 1px solid #dddddd;
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+  background-color: #dddddd;
+}
+
+#lpInData {
+  padding: 0;
+}
+
+#InDataDesc, #ExDataDesc {
+  padding: 0 19px 0;
+}
+
+#DataMode, #NoOutCat {
+  padding: 2px 19px 2px;
+  background-color: gold;
+}
+
+input[type="radio"]:checked+span {  /*bold when checked*/
+  font-weight: bold;
+  }
+  
+input[type="checkbox"]:checked+span {  /*bold when checked*/
+  font-weight: bold;
+  }
+
+#SelField {
+  background-color: gold;
+  padding: 19px 19px 5px;
+  font-size: 1.2em;
+}
+
+#About h4, #About h5, #leftPanelNew h4, #InDataDesc h4, #InDataDesc h3, #ExDataDesc h4, #VisSetupDesc h4, #EGGDescrOut h4, #applicationsNew h4 {
+  font-weight: bold;
+}
+
+#downloadData, #downShowCont, #downloadPlot {
+  background-color: gold;  /*LightGray*/
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#Execute {
+  background-color: Green;  /*LightGray*/
+  font-size: 1.25em;
+  font-weight: bold;
+  color: White;
+}
+
+.dataTables_scrollHeadInner,
+.dataTable {
+  width: 100%;
+}
