@@ -1,0 +1,39 @@
+citHeader("To cite EpiCircos please use the following and also cite the circlize package and the ComplexHeatmap package if using the legend function:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "EpiCircos: An implementation of Circos plots for epidemiologists",
+  author   = "Matthew A Lee",
+  year     = "2019",
+  url      = "https://github.com/mattlee821/EpiCircos",
+  textVersion = "Lee, MA. (2019) EpiCircos: An implementation of Circos plots for epidemiologists, Available at https://github.com/mattlee821/EpiCircos"
+)
+
+citEntry(
+   entry="article",
+   title = "circlize implements and enhances circular visualization in R",
+   author = "Zuguang Gu, Lei Gu, Roland Eils, Matthias Schlesner and Benedikt Brors",
+   journal = "Bioinformatics",
+   volume = 30,
+   issue = 19,
+   pages = "2811-2812",
+   year = 2014,
+   textVersion = "Gu, Z. (2014) circlize implements and enhances circular visualization in R. Bioinformatics."
+)
+
+citEntry(
+   entry="article",
+   title = "Complex heatmaps reveal patterns and correlations in multidimensional genomic data",
+   author = personList(as.person("Zuguang Gu"),
+                       as.person("Roland Eils"),
+                       as.person("Matthias Schlesner")),
+   journal = "Bioinformatics",
+   year = 2016,
+   textVersion = "Gu, Z. (2016) Complex heatmaps reveal patterns and correlations in multidimensional genomic data. Bioinformatics."
+)
+
+citFooter("This free open-source software implements academic
+research by the authors and co-workers. If you use it,
+please support the project by citing the appropriate
+journal articles.")
+
