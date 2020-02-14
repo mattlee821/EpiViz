@@ -1,8 +1,8 @@
-mr_viz = function(){
+epiviz = function(){
   list(
     div(
-      id = "mr_viz",
-      includeMarkdown(file.path("text", "mr_viz.md"))
+      id = "epiviz",
+      includeMarkdown(file.path("text", "epiviz.md"))
     )
   )
 }
@@ -29,10 +29,10 @@ home_example = function(){
   list(
     div(
       id = "home_example",
-      downloadButton("downloadexampledata1", "data1"),
-      downloadButton("downloadexampledata2", "data2"),
-      downloadButton("downloadexampledata3", "data3"),
       includeMarkdown(file.path("text", "home_example.md")),
+      downloadButton("downloadexampledata1", "Sex combined results"),
+      downloadButton("downloadexampledata2", "Male results"),
+      downloadButton("downloadexampledata3", "Female results"),
       )
     )
 }

@@ -1,10 +1,4 @@
-<p align="justify">You can download <strong>example data</strong> and use this to guide you through using the app. Each of the three example data sets are identical and set-up with two grouping columns that will produce the following two plots:</p>
-
-
-<img src="../www/gallery/mr_viz_example_group.png"
-alt="Circos plot example with 13 groups"
-style="width:100%">
-
-<img src="../www/gallery/mr_viz_example_subgroup.png"
-alt="Circos plot example with 28 groups"
-style="width:100%">
+<h3> Example data</h3>
+<p align="justify"> 
+To demonstrate the use of <strong>EpiViz</strong> we performed a Mendelian randomization analysis of body mass index with 123 metabolites. We performed three analyses using genetic instruments for body mass index measured in Europeans: sex combined, males, females. Full details of the analysis are <a href="">available</a> and we provide the results from each analysis here as example data to use with the app. 
+</p>

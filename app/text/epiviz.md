@@ -60,7 +60,7 @@ body {
 
 
 <!-- Header -->
-<img src = "../www/banner2.png"
+<img src = "../www/epiviz_banner.png"
      style = "width:100%"
      alt = "example circos plot 1">
 
@@ -71,7 +71,7 @@ body {
   <div class="column">
   
   <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-	<img src="../www/gallery/mr_viz_example_group.png"
+	<img src="../www/gallery/epiviz_example_group.png"
   alt="Circos plot example" 
   style="width:100%">
   </a>
@@ -81,7 +81,7 @@ body {
   <!-- Column 2 -->
   <div class="column">
   <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-	<img src="../www/gallery/mr_viz_example_subgroup.png"
+	<img src="../www/gallery/epiviz_example_subgroup.png"
   alt="" 
   style="width:100%">
   </a>

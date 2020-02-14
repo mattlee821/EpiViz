@@ -16,30 +16,30 @@ server <- shinyServer(function(input, output, session) {
   # Download example dataset
   output$downloadexampledata1 <- downloadHandler(
     filename = function() {
-      paste0("exampledata1.txt")
+      paste0("sex_combined_results.txt")
     },
     content = function(file) {
-      file.copy("exampledata1.txt", file)
+      file.copy("sex_combined_results.txt", file)
     },
     contentType = NA
   )
   
   output$downloadexampledata2 <- downloadHandler(
     filename = function() {
-      paste0("exampledata2.txt")
+      paste0("male_results.txt")
     },
     content = function(file) {
-      file.copy("exampledata2.txt", file)
+      file.copy("male_results.txt", file)
     },
     contentType = NA
   )
   
   output$downloadexampledata3 <- downloadHandler(
     filename = function() {
-      paste0("exampledata3.txt")
+      paste0("female_results.txt")
     },
     content = function(file) {
-      file.copy("exampledata3.txt", file)
+      file.copy("female_results.txt", file)
     },
     contentType = NA
   )

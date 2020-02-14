@@ -34,22 +34,22 @@ ui <- navbarPage(
     title = "",
     theme = shinytheme("flatly"),
     fluid = TRUE,
-    selected = "MR Viz",
+    selected = "EpiViz",
     inverse = FALSE,
     
-  # MR Viz ====
+  # EpiViz ====
     tabPanel(
-      title = "MR Viz",
-      mr_viz()),
+      title = "EpiViz",
+      epiviz()),
   
   # HOME ====
   tabPanel(
     title = "Home",
     fluidRow(
       column(12, title = "", id = "home_home", home_home()),
-      column(5, title = "About", id = "home_about", home_about()),
+      column(4, title = "About", id = "home_about", home_about()),
       column(4, title = "Example", id = "home_example", home_example()),
-      column(3, title = "", id = "home_footer", home_footer())
+      column(4, title = "", id = "home_footer", home_footer())
     )),
   
   # HOW TO ====
@@ -72,7 +72,7 @@ ui <- navbarPage(
                  ## > sidebar panel ====
                  sidebarPanel(
                    h4("Upload data:"),
-                   helpText("tab seperated; header = TRUE"),
+                   helpText("read.table(..., header = TRUE, sep = \t)"),
                    
                    fileInput(
                      inputId = "file1",
