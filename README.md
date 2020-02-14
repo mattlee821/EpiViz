@@ -1,6 +1,8 @@
 
 # `EpiViz`: an implementation of Circos plots for epidemiologists
 
+[![DOI](https://zenodo.org/badge/238912321.svg)](https://zenodo.org/badge/latestdoi/238912321)
+
 <center>
 
 #### [Web application](https://mattlee.shinyapps.io/EpiViz/) – [`R` package](https://github.com/mattlee821/EpiViz/tree/master/R_package)
