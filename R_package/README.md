@@ -14,7 +14,7 @@ install.packages("devtools")
 library(devtools)
 
 # Install EpiViz directly from GitHub
-devtools::install_github("mattlee821/EpiViz")
+devtools::install_github("mattlee821/EpiViz/R_package")
 library(EpiViz)
 ```
 
