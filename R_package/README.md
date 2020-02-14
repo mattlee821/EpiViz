@@ -48,7 +48,7 @@ if (!requireNamespace("BiocManager", quietly=TRUE))
 BiocManager::install("ComplexHeatmap")
 
 # Install EpiViz directly from GitHub
-devtools::install_github("mattlee821/EpiViz")
+devtools::install_github("mattlee821/EpiViz/R_package")
 library(EpiViz)
 ```
 
@@ -83,13 +83,13 @@ label
 
 <th style="text-align:right;">
 
-effect\_estimate
+effect\_extimate
 
 </th>
 
 <th style="text-align:right;">
 
-pvalue
+p\_value
 
 </th>
 
@@ -107,7 +107,7 @@ upper\_confidence\_interval
 
 <th style="text-align:left;">
 
-section
+group
 
 </th>
 
@@ -121,19 +121,7 @@ section
 
 <td style="text-align:left;">
 
-abc
-
-</td>
-
-<td style="text-align:right;">
-
-0.12
-
-</td>
-
-<td style="text-align:right;">
-
-0.1
+label1
 
 </td>
 
@@ -145,13 +133,25 @@ abc
 
 <td style="text-align:right;">
 
+0.01
+
+</td>
+
+<td style="text-align:right;">
+
+0.10
+
+</td>
+
+<td style="text-align:right;">
+
 0.12
 
 </td>
 
 <td style="text-align:left;">
 
-a
+Group1
 
 </td>
 
@@ -161,37 +161,37 @@ a
 
 <td style="text-align:left;">
 
-def
+label2
 
 </td>
 
 <td style="text-align:right;">
 
-0.34
+0.12
 
 </td>
 
 <td style="text-align:right;">
 
-0.2
+0.02
 
 </td>
 
 <td style="text-align:right;">
 
-0.33
+0.11
 
 </td>
 
 <td style="text-align:right;">
 
-0.35
+0.13
 
 </td>
 
 <td style="text-align:left;">
 
-a
+Group1
 
 </td>
 
@@ -201,37 +201,37 @@ a
 
 <td style="text-align:left;">
 
-geh
+label3
 
 </td>
 
 <td style="text-align:right;">
 
-0.56
+0.13
 
 </td>
 
 <td style="text-align:right;">
 
-0.3
+0.03
 
 </td>
 
 <td style="text-align:right;">
 
-0.55
+0.12
 
 </td>
 
 <td style="text-align:right;">
 
-0.57
+0.14
 
 </td>
 
 <td style="text-align:left;">
 
-b
+Group2
 
 </td>
 
@@ -241,37 +241,37 @@ b
 
 <td style="text-align:left;">
 
-ijk
+label4
 
 </td>
 
 <td style="text-align:right;">
 
-0.78
+0.14
 
 </td>
 
 <td style="text-align:right;">
 
-0.4
+0.04
 
 </td>
 
 <td style="text-align:right;">
 
-0.77
+0.13
 
 </td>
 
 <td style="text-align:right;">
 
-0.79
+0.15
 
 </td>
 
 <td style="text-align:left;">
 
-c
+Group3
 
 </td>
 
@@ -281,37 +281,37 @@ c
 
 <td style="text-align:left;">
 
-lmn
+label5
 
 </td>
 
 <td style="text-align:right;">
 
-0.91
+0.15
 
 </td>
 
 <td style="text-align:right;">
 
-0.5
+0.05
 
 </td>
 
 <td style="text-align:right;">
 
-0.90
+0.14
 
 </td>
 
 <td style="text-align:right;">
 
-0.92
+0.16
 
 </td>
 
 <td style="text-align:left;">
 
-c
+Group3
 
 </td>
 
@@ -362,7 +362,7 @@ be: `"points"`, `"lines"`, `"bar"`, `"histogram"`. For each track a
 seperate data frame must be provided. The data frames must:
 
   - have the same columns - names and order
-  - have the same number of rows
+      - have the same number of rows
 
 <!-- end list -->
 
@@ -481,8 +481,8 @@ section column and plot them in the ascending order of the
 `order_column`. Your order column should be `1:n`, where n is the number
 of sections and each variable within the section has the same value. If
 we ordered the below table by the default setting the sections would be
-plotted in order of a, b, c. If we plotted based on the order column the
-sections would be plotted c, b, a.
+plotted in order of Group1 - Group3. If we plotted based on the order
+column the sections would be plotted Group3 - Group1.
 
 <table>
 
@@ -498,11 +498,11 @@ label
 
 <th style="text-align:left;">
 
-section
+group
 
 </th>
 
-<th style="text-align:right;">
+<th style="text-align:left;">
 
 order
 
@@ -518,17 +518,17 @@ order
 
 <td style="text-align:left;">
 
-abc
+label1
 
 </td>
 
 <td style="text-align:left;">
 
-a
+Group1
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:left;">
 
 3
 
@@ -540,17 +540,17 @@ a
 
 <td style="text-align:left;">
 
-def
+label2
 
 </td>
 
 <td style="text-align:left;">
 
-a
+Group1
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:left;">
 
 3
 
@@ -562,17 +562,17 @@ a
 
 <td style="text-align:left;">
 
-geh
+label3
 
 </td>
 
 <td style="text-align:left;">
 
-b
+Group2
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:left;">
 
 2
 
@@ -584,17 +584,17 @@ b
 
 <td style="text-align:left;">
 
-ijk
+label4
 
 </td>
 
 <td style="text-align:left;">
 
-c
+Group3
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:left;">
 
 1
 
@@ -606,17 +606,17 @@ c
 
 <td style="text-align:left;">
 
-lmn
+label5
 
 </td>
 
 <td style="text-align:left;">
 
-c
+Group3
 
 </td>
 
-<td style="text-align:right;">
+<td style="text-align:left;">
 
 1
 
@@ -636,10 +636,6 @@ circos_plot(...
 ```
 
 ## Session info
-
-``` r
-sessionInfo()
-```
 
     ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
@@ -661,7 +657,7 @@ sessionInfo()
     ##  [9] viridisLite_0.3.0 colorspace_1.4-1  R6_2.4.1          rlang_0.4.4      
     ## [13] highr_0.8         stringr_1.4.0     httr_1.4.1        tools_3.6.2      
     ## [17] webshot_0.5.2     xfun_0.12         htmltools_0.4.0   yaml_2.2.1       
-    ## [21] digest_0.6.23     lifecycle_0.1.0   tibble_2.1.3      crayon_1.3.4     
+    ## [21] digest_0.6.24     lifecycle_0.1.0   tibble_2.1.3      crayon_1.3.4     
     ## [25] kableExtra_1.1.0  readr_1.3.1       vctrs_0.2.2       glue_1.3.1       
     ## [29] evaluate_0.14     rmarkdown_2.1.1   stringi_1.4.5     compiler_3.6.2   
     ## [33] pillar_1.4.3      scales_1.1.0      pkgconfig_2.0.3
