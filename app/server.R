@@ -94,9 +94,9 @@ server <- shinyServer(function(input, output, session) {
   
   # Create data to describe the imported dataset
   output$rowcount <-
-    renderText(paste("Total number of rows in uploaded file(s):", nrow(track2_data1())))
+    renderText(paste("Total number of rows in uploaded file:", nrow(track2_data1())))
   output$colcount <-
-    renderText(paste("Total number of columns in uploaded file(s):", ncol(track2_data1())))
+    renderText(paste("Total number of columns in uploaded file:", ncol(track2_data1())))
   
   # Render head of imported dataset
   output$data1 <- renderTable({
@@ -133,9 +133,9 @@ server <- shinyServer(function(input, output, session) {
   
   # Create data to describe the imported dataset
   output$rowcount2 <-
-    renderText(paste("Total number of rows in uploaded file(s):", nrow(track3_data1())))
+    renderText(paste("Total number of rows in uploaded file:", nrow(track3_data1())))
   output$colcount2 <-
-    renderText(paste("Total number of columns in uploaded file(s):", ncol(track3_data1())))
+    renderText(paste("Total number of columns in uploaded file:", ncol(track3_data1())))
   
   # Render head of imported dataset
   output$data2 <- renderTable({
@@ -171,9 +171,9 @@ server <- shinyServer(function(input, output, session) {
   
   # Create data to describe the imported dataset
   output$rowcount3 <-
-    renderText(paste("Total number of rows in uploaded file(s):", nrow(track4_data1())))
+    renderText(paste("Total number of rows in uploaded file:", nrow(track4_data1())))
   output$colcount3 <-
-    renderText(paste("Total number of columns in uploaded file(s):", ncol(track4_data1())))
+    renderText(paste("Total number of columns in uploaded file:", ncol(track4_data1())))
   
   # Render head of imported dataset
   output$data3 <- renderTable({
@@ -204,7 +204,7 @@ server <- shinyServer(function(input, output, session) {
   
   output$pval <- renderText(paste0("New threshold: 0.05/", input$pvalue_adjustment, " = ", round(0.05/input$pvalue_adjustment, digits = 8))
   )
-  output$pval_label <- renderText(paste0("P > 0.05/", input$pvalue_adjustment))
+  output$pval_label <- renderText(paste0("P <= 0.05/", input$pvalue_adjustment))
   
   # When the first file is uploaded, pass the column headings to the selectInput widgets
   observeEvent(input$file1, {

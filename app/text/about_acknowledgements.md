@@ -20,7 +20,7 @@
 
 <a href="http://www.bris.ac.uk/expsych/people/osama-mahmoud/overview.html">Osama H Mahmoud</a>. 
 
-The authors work in the <a href = "http://www.bristol.ac.uk/integrative-epidemiology/">MRC Integrative Epidemiology Unit</a> at the <a href = "http://www.bristol.ac.uk/">University of Bristol</a>, which is supported by the <a href = "https://mrc.ukri.org/">Medical Research Council</a> (grant numbers for 2013-2018: MC_UU_12013/1-6; 2018-2023: MC_UU_00011/1-7) and the <a href = "http://www.bristol.ac.uk/">University of Bristol</a>. This work was also supported by a <a href = "https://wellcome.ac.uk/">Wellcome Trust</a> Senior Investiagtor Award held by Nicholas J Timpson (202802/Z/16/Z) and a <a href = "https://www.gw4biomed.ac.uk/">GW4 BioMed</a> PhD studentship (MR/R502340/1) held by Matthew A Lee.</p>
+The authors work in the <a href = "http://www.bristol.ac.uk/integrative-epidemiology/">MRC Integrative Epidemiology Unit</a> at the <a href = "http://www.bristol.ac.uk/">University of Bristol</a>, which is supported by the <a href = "https://mrc.ukri.org/">Medical Research Council</a> (grant numbers for 2013-2018: MC_UU_12013/1-6; 2018-2023: MC_UU_00011/1-7) and the <a href = "http://www.bristol.ac.uk/">University of Bristol</a>. This work was also supported by a <a href = "https://wellcome.ac.uk/">Wellcome Trust</a> Senior Investiagtor Award held by Nicholas J Timpson (202802/Z/16/Z) and an <a href = "https://www.gw4biomed.ac.uk/">MRC GW4 BioMed</a> PhD studentship (MR/R502340/1) held by Matthew A Lee.</p>
 
 <p align = "justify">We would like to thank the following for feedback in the design and implementation of <strong>EpiViz</strong>: Caroline Bull, Charlie Hatcher, Kurt Taylor, Nancy Mcbride, Neil Goulding, Steph Suddell.</p>
 

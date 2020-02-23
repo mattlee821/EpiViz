@@ -484,7 +484,7 @@ my_circos_plot <- function(track_number,
     circos.yaxis(side = y_axis_location,
                  sector.index = x_axis_index, #the sector this is plotted in 
                  track.index = track4,
-                 at = c(track4_axis_min, track4_axis_min_half, track_axis_reference, track4_axis_max_half, track4_axis_max), #location on the y axis as well as the name of the label
+                 at = c(track4_axis_min, track_axis_reference, track4_axis_max), #location on the y axis as well as the name of the label
                  tick = y_axis_tick, tick.length = y_axis_tick_length,
                  labels.cex = y_axis_label_cex)}
   # 6. Legend - ====

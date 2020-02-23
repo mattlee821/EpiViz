@@ -95,7 +95,7 @@ about_updates = function(){
   list(
     div(
       id = "about_updates",
-      includeMarkdown(file.path("text", "about_updates.md"))
+      includeMarkdown(file.path("text", "about_updates.md")),
     )
   )
 }

@@ -72,7 +72,7 @@ ui <- navbarPage(
                  ## > sidebar panel ====
                  sidebarPanel(
                    h4("Upload data:"),
-                   helpText("read.table(..., header = TRUE, sep = \t)"),
+                   helpText("Upload tab seperated text files for each track."),
                    
                    fileInput(
                      inputId = "file1",
@@ -215,19 +215,19 @@ ui <- navbarPage(
                    
                    textInput("track2_label",
                              "Track 2 legend label",
-                             value = "Example1"),
+                             value = ""),
                    
                    textInput("track3_label",
                              "Track 3 legend label",
-                             value = "Example2"),
+                             value = ""),
                    
                    textInput("track4_label",
                              "Track 4 legend label",
-                             value = "Example3"),
+                             value = ""),
                    
                    textInput("pvalue_label",
                              "P-value threshold label",
-                             value = "P > 123"),
+                             value = "P <= 0.05"),
                    
                    textOutput("pval_label"),
                    

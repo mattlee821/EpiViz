@@ -11,5 +11,5 @@
 </ul>
 </p>
 
-<p align="justify">You can cite <a href = ""><strong>EpiViz</strong></a>, raise isssues and contribute via <a href = "">GitHub</a> and get in <a href = "mailto:matthew.lee@bristol.ac.uk">touch</a> with suggestions!</p>
+<p align="justify">You can cite <a href = ""><strong>EpiViz</strong></a>, raise isssues and contribute via <a href = "">GitHub</a>. Please get in <a href = "mailto:matthew.lee@bristol.ac.uk">touch</a> with suggestions!</p>
 
