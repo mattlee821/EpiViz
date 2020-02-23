@@ -33,9 +33,7 @@ Error: (converted from warning) package ‘ComplexHeatmap’ is not available (f
 
 To fix this you should install
 [`ComplexHeatmap`](https://jokergoo.github.io/ComplexHeatmap-reference/book/)
-first and then `EpiViz`. Install
-[`ComplexHeatmap`](https://jokergoo.github.io/ComplexHeatmap-reference/book/)
-as follows:
+first and then `EpiViz`:
 
 ``` r
 # Install devtools
@@ -57,10 +55,10 @@ library(EpiViz)
 ### Step 1: data preperation
 
 Example data is provided with the package and can be assigned with`data
-<- EpiViz::EpiViz_data`. The data can be used directly in the
-`circos_plot()` function by assigning it to `track1_data =
-EpiViz::EpiViz_data`. For more info `?EpiViz::EpiViz_data`. When using
-your own data, your data frame needs to include:
+<- EpiViz::EpiViz_data*` – where `*` is 1-3. The data can be used
+directly in the `circos_plot()` function by assigning it to `track1_data
+= EpiViz::EpiViz_data*`. For more info `?EpiViz::EpiViz_data*`. When
+using your own data, your data frame needs to include:
 
   - label column
   - effect estimate column
@@ -342,7 +340,7 @@ track.
 
 ``` r
 circos_plot(track_number = 1, # how many tracks do you want to plot
-            track1_data = EpiViz::EpiViz_data, # what is the dataframe for your first track
+            track1_data = EpiViz::EpiViz_data1, # what is the dataframe for your first track
             track1_type = "points", # how do you want to plot your first track
             label_column = 1, # whats is the column of your labels
             section_column = 2, # what is the column of your sections
@@ -362,31 +360,28 @@ be: `"points"`, `"lines"`, `"bar"`, `"histogram"`. For each track a
 seperate data frame must be provided. The data frames must:
 
   - have the same columns - names and order
-      - have the same number of rows
+  - have the same number of rows
 
 <!-- end list -->
 
 ``` r
 circos_plot(track_number = 3,
-            track1_data = EpiViz::EpiViz_data,
-            track2_data = EpiViz::EpiViz_data,
-            track3_data = EpiViz::EpiViz_data,
+            track1_data = EpiViz::EpiViz_data1,
+            track2_data = EpiViz::EpiViz_data2,
+            track3_data = EpiViz::EpiViz_data3,
             track1_type = "points",
             track2_type = "lines",
             track3_type = "bar",
             label_column = 1,
-            section_column = 2,
-            estimate_column = 4,
-            pvalue_column = 5,
-            pvalue_adjustment = 0.05,
-            lower_ci = 7,
-            upper_ci = 8,
-            lines_column = 10,
+            section_column = 9,
+            estimate_column = 2,
+            pvalue_column = 3,
+            pvalue_adjustment = 1,
+            lower_ci = 4,
+            upper_ci = 5,
+            lines_column = 2,
             lines_type = "o",
-            bar_column = 9,
-            histogram_column = 4,
-            histogram_binsize = 0.01,
-            histogram_densityplot = F)
+            bar_column = 2)
 ```
 
 <img src="docs/images/3track_type_example.svg" width="100%" />
@@ -395,29 +390,30 @@ circos_plot(track_number = 3,
 
 ## Legend
 
-The legend function is taken from [`ComplexHeatmap`](). It will place a
-legend at the bottom of the plot. The legend will be populated with:
-points coloured for each track and a label for each track, a point for
-p-value label, and section headers.
+The legend function is taken from
+[`ComplexHeatmap`](https://github.com/jokergoo/ComplexHeatmap). It will
+place a legend at the bottom of the plot. The legend will be populated
+with: points coloured for each track and a label for each track, a point
+for p-value label, and section headers.
 
 ``` r
 circos_plot(track_number = 3,
-            track1_data = EpiViz::EpiViz_data,
-            track2_data = EpiViz::EpiViz_data,
-            track3_data = EpiViz::EpiViz_data,
+            track1_data = EpiViz::EpiViz_data1,
+            track2_data = EpiViz::EpiViz_data2,
+            track3_data = EpiViz::EpiViz_data3,
             track1_type = "points",
             track2_type = "lines",
             track3_type = "bar",
             label_column = 1,
-            section_column = 2,
-            estimate_column = 4,
-            pvalue_column = 5,
-            pvalue_adjustment = 0.05,
-            lower_ci = 7,
-            upper_ci = 8,
-            lines_column = 10,
+            section_column = 9,
+            estimate_column = 2,
+            pvalue_column = 3,
+            pvalue_adjustment = 1,
+            lower_ci = 4,
+            upper_ci = 5,
+            lines_column = 2,
             lines_type = "o",
-            bar_column = 9,
+            bar_column = 2,
             legend = TRUE,
             track1_label = "Track 1",
             track2_label = "Track 2",
@@ -448,12 +444,6 @@ dev.off()
 If just using the `RStudio` plots panel you will not be able to see the
 finished plot as it will appear. Similarly, saving as anything other
 than `PDF` will not give a good visualisation.
-
-Plot saved as `PNG` file:
-
-<img src="docs/images/png_example.png" width="100%" />
-
- 
 
 ## Other stuff
 
@@ -639,7 +629,7 @@ circos_plot(...
 
     ## R version 3.6.2 (2019-12-12)
     ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    ## Running under: macOS Mojave 10.14.6
+    ## Running under: macOS Catalina 10.15.3
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
@@ -658,6 +648,6 @@ circos_plot(...
     ## [13] highr_0.8         stringr_1.4.0     httr_1.4.1        tools_3.6.2      
     ## [17] webshot_0.5.2     xfun_0.12         htmltools_0.4.0   yaml_2.2.1       
     ## [21] digest_0.6.24     lifecycle_0.1.0   tibble_2.1.3      crayon_1.3.4     
-    ## [25] kableExtra_1.1.0  readr_1.3.1       vctrs_0.2.2       glue_1.3.1       
+    ## [25] kableExtra_1.1.0  readr_1.3.1       vctrs_0.2.3       glue_1.3.1       
     ## [29] evaluate_0.14     rmarkdown_2.1.1   stringi_1.4.5     compiler_3.6.2   
     ## [33] pillar_1.4.3      scales_1.1.0      pkgconfig_2.0.3
