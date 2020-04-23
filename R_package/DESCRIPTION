@@ -20,4 +20,4 @@ Depends:
     grDevices
 BugReports: https://github.com/mattlee821/EpiViz/issues
 URL: https://github.com/mattlee821/EpiViz
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
