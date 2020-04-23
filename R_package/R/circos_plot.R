@@ -32,7 +32,7 @@
 #' @param track1_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20)
 #' @param track2_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20)
 #' @param track3_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20). It is sometimes worth increasing the size of track 3 to 30 percent
-
+#' @param equal_axis Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.
 #'
 #' @export
 #'
@@ -86,7 +86,8 @@ circos_plot <- function(track_number,
                         circle_size = 25,
                         track1_height = 0.20,
                         track2_height = 0.20,
-                        track3_height = 0.20){
+                        track3_height = 0.20,
+                        equal_axis = FALSE){
 
   # Default plot paramaters ====
   track1 <- 1 # track 1 is your section header
@@ -165,6 +166,139 @@ circos_plot <- function(track_number,
   label_cex <- 0.6
 
 
+  # Axis set-up ====
+  if (equal_axis == TRUE && track_number == 2){
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 2 axis limits
+    a <- min(track2_data[[lower_ci]])
+    b <- min(track2_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track2_data[[lower_ci]])
+    b <- max(track2_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify shared axis limits
+    axis_min <- min(track1_axis_min, track2_axis_min)
+    axis_max <- max(track1_axis_max, track2_axis_max)
+    
+    # assign axis limits for each track
+    track1_axis_min <- axis_min
+    track2_axis_min <- axis_min
+    track1_axis_max <- axis_max
+    track2_axis_max <- axis_max
+    
+  }
+  else if (equal_axis == TRUE && track_number == 3) {
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 2 axis limits
+    a <- min(track2_data[[lower_ci]])
+    b <- min(track2_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track2_data[[lower_ci]])
+    b <- max(track2_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 3 axis limits
+    a <- min(track3_data[[lower_ci]])
+    b <- min(track3_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track3_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track3_data[[lower_ci]])
+    b <- max(track3_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track3_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify shared axis limits
+    axis_min <- min(track1_axis_min, track2_axis_min, track3_axis_min)
+    axis_max <- max(track1_axis_max, track2_axis_max, track3_axis_min)
+    
+    # assign axis limits for each track
+    track1_axis_min <- axis_min
+    track2_axis_min <- axis_min
+    track3_axis_min <- axis_min
+    track1_axis_max <- axis_max
+    track2_axis_max <- axis_max
+    track3_axis_max <- axis_max
+  }
+  else if (equal_axis == FALSE){
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 2 axis limits
+    a <- min(track2_data[[lower_ci]])
+    b <- min(track2_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track2_data[[lower_ci]])
+    b <- max(track2_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 3 axis limits
+    a <- min(track3_data[[lower_ci]])
+    b <- min(track3_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track3_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track3_data[[lower_ci]])
+    b <- max(track3_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track3_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+  }
+  
+  
   # plot set-up ====
   ## the plot region is set-up based on track1_data
   data <- track1_data
@@ -301,20 +435,20 @@ circos_plot <- function(track_number,
 
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
 
-    ## 2. set axis limits
-    a <- min(data[[lower_ci]])
-    b <- min(data[[upper_ci]])
-    axis_min <- min(a,b)
-    axis_min <- round(axis_min, 3)
-    axis_min <- round(axis_min + (axis_min * 0.1), 3)
-    axis_min_half <- round(axis_min/2, 3)
-
-    a <- max(data[[lower_ci]])
-    b <- max(data[[upper_ci]])
-    axis_max <- max(a,b)
-    axis_max <- round(axis_max, 3)
-    axis_max <- round(axis_max + (axis_max * 0.01), 3)
-    axis_max_half <- round(axis_max/2, 3)
+    ## 2. set axis limits -- DEPRECATED
+    # a <- min(data[[lower_ci]])
+    # b <- min(data[[upper_ci]])
+    # axis_min <- min(a,b)
+    # axis_min <- round(axis_min, 3)
+    # axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    # axis_min_half <- round(axis_min/2, 3)
+    # 
+    # a <- max(data[[lower_ci]])
+    # b <- max(data[[upper_ci]])
+    # axis_max <- max(a,b)
+    # axis_max <- round(axis_max, 3)
+    # axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    # axis_max_half <- round(axis_max/2, 3)
 
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
@@ -324,7 +458,7 @@ circos_plot <- function(track_number,
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
-                                       ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
+                                       ylim = c(track1_axis_min, track1_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track1_height, #how big is the track as % of circle
 
                                        #Set sector background
@@ -375,7 +509,7 @@ circos_plot <- function(track_number,
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
                            track.index = track.index,
-                           at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
+                           at = c(track1_axis_min,  track_axis_reference,  track1_axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
@@ -647,20 +781,20 @@ circos_plot <- function(track_number,
 
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
 
-    ## 2. set axis limits
-    a <- min(data[[lower_ci]])
-    b <- min(data[[upper_ci]])
-    axis_min <- min(a,b)
-    axis_min <- round(axis_min, 3)
-    axis_min <- round(axis_min + (axis_min * 0.1), 3)
-    axis_min_half <- round(axis_min/2, 3)
-
-    a <- max(data[[lower_ci]])
-    b <- max(data[[upper_ci]])
-    axis_max <- max(a,b)
-    axis_max <- round(axis_max, 3)
-    axis_max <- round(axis_max + (axis_max * 0.01), 3)
-    axis_max_half <- round(axis_max/2, 3)
+    ## 2. set axis limits -- DEPRECATED
+    # a <- min(data[[lower_ci]])
+    # b <- min(data[[upper_ci]])
+    # axis_min <- min(a,b)
+    # axis_min <- round(axis_min, 3)
+    # axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    # axis_min_half <- round(axis_min/2, 3)
+    # 
+    # a <- max(data[[lower_ci]])
+    # b <- max(data[[upper_ci]])
+    # axis_max <- max(a,b)
+    # axis_max <- round(axis_max, 3)
+    # axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    # axis_max_half <- round(axis_max/2, 3)
 
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
@@ -670,7 +804,7 @@ circos_plot <- function(track_number,
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
-                                       ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
+                                       ylim = c(track2_axis_min, track2_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track2_height, #how big is the track as % of circle
 
                                        #Set sector background
@@ -721,7 +855,7 @@ circos_plot <- function(track_number,
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
                            track.index = track.index,
-                           at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
+                           at = c(track2_axis_min,  track_axis_reference,  track2_axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
@@ -998,20 +1132,20 @@ circos_plot <- function(track_number,
 
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
 
-    ## 2. set axis limits
-    a <- min(data[[lower_ci]])
-    b <- min(data[[upper_ci]])
-    axis_min <- min(a,b)
-    axis_min <- round(axis_min, 3)
-    axis_min <- round(axis_min + (axis_min * 0.1), 3)
-    axis_min_half <- round(axis_min/2, 3)
-
-    a <- max(data[[lower_ci]])
-    b <- max(data[[upper_ci]])
-    axis_max <- max(a,b)
-    axis_max <- round(axis_max, 3)
-    axis_max <- round(axis_max + (axis_max * 0.01), 3)
-    axis_max_half <- round(axis_max/2, 3)
+    ## 2. set axis limits -- DEPRECATED
+    # a <- min(data[[lower_ci]])
+    # b <- min(data[[upper_ci]])
+    # axis_min <- min(a,b)
+    # axis_min <- round(axis_min, 3)
+    # axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    # axis_min_half <- round(axis_min/2, 3)
+    # 
+    # a <- max(data[[lower_ci]])
+    # b <- max(data[[upper_ci]])
+    # axis_max <- max(a,b)
+    # axis_max <- round(axis_max, 3)
+    # axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    # axis_max_half <- round(axis_max/2, 3)
 
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
@@ -1021,7 +1155,7 @@ circos_plot <- function(track_number,
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
-                                       ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
+                                       ylim = c(track3_axis_min, track3_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track3_height, #how big is the track as % of circle
 
                                        #Set sector background
@@ -1072,7 +1206,7 @@ circos_plot <- function(track_number,
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
                            track.index = track.index,
-                           at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
+                           at = c(track3_axis_min,  track_axis_reference,  track3_axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
