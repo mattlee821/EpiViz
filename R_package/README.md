@@ -625,6 +625,15 @@ circos_plot(...
             ...)
 ```
 
+### Axis
+Applicable to 'points' type tracks. By default each track is plotted independently of the others, that is the axis are specific to eahc track. Using `equal_axis = TRUE` you can set all track axis to be the same. The min and max of the $X$ axis will be dictated by the minimum and maximum of teh lower and upper confidence intervals from each track.
+
+``` r
+circos_plot(...
+            equal_axis = TRUE,
+            ...)
+```
+
 ## Session info
 
     ## R version 3.6.2 (2019-12-12)
