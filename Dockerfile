@@ -36,11 +36,20 @@ RUN apt-get update \
  
 RUN Rscript  -e 'BiocManager::install("ComplexHeatmap")'
 
-EXPOSE 7724
+EXPOSE 3838
 
 COPY shiny-server.sh /usr/bin/shiny-server.sh
 COPY /app /srv/shiny-server/
 
+
 CMD ["/usr/bin/shiny-server.sh"]
 
+
+###Things I tried for ref!
+#CMD ["exec shiny-server 2>&1"]
+#CMD ["/usr/bin/shiny-server.sh & R -e `shiny::runApp(appDir='/srv/shiny-server',host='0.0.0.0',port=7724)` && fg "]
+#CMD ["R -e `setwd('/srv/shiny-server');shiny::runApp(host='0.0.0.0',port=7724)`"]
+#CMD ["cd /srv/shiny-server"]
+#RUN R -e "shiny::runApp(appDir='/srv/shiny-server',host='0.0.0.0',port=7724)"
+#RUN R -e "setwd('/srv/shiny-server');shiny::runApp(host='0.0.0.0',port=7724)" 
 #CMD ["/srv/shinyserver/R -e "shiny::runApp(host='0.0.0.0',port=7724)"]
