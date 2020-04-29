@@ -43,4 +43,4 @@ COPY /app /srv/shiny-server/
 
 CMD ["/usr/bin/shiny-server.sh"]
 
-#CMD ["/srv/shinyserver/R -e "shiny::runApp(port=7724)"]
+#CMD ["/srv/shinyserver/R -e "shiny::runApp(host='0.0.0.0',port=7724)"]
