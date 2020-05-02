@@ -4,7 +4,8 @@
 \name{EpiViz_data3}
 \alias{EpiViz_data3}
 \title{Example data: Mendelian randomization results from an analysis of BMI measured in European women and 123 metabolites}
-\format{A simulated data frame with 123 rows and 8 variables imitating a traditional epidemiology results file from a linear regression:
+\format{
+A simulated data frame with 123 rows and 8 variables imitating a traditional epidemiology results file from a linear regression:
 \describe{
   \item{label}{The name of the outcomes}
   \item{beta}{Effect estimates}
@@ -16,7 +17,8 @@
   \item{class}{The groups which the outcomes can be put into}
   \item{subclass}{The subgroups which the outcomes can be put into}
   ...
-}}
+}
+}
 \usage{
 EpiViz_data3
 }

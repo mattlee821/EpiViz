@@ -35,7 +35,8 @@ circos_plot(
   circle_size = 25,
   track1_height = 0.2,
   track2_height = 0.2,
-  track3_height = 0.2
+  track3_height = 0.2,
+  equal_axis = FALSE
 )
 }
 \arguments{
@@ -100,6 +101,8 @@ circos_plot(
 \item{track2_height}{Size of the track as a percent of the whole circle. Default is 20 percent (0.20)}
 
 \item{track3_height}{Size of the track as a percent of the whole circle. Default is 20 percent (0.20). It is sometimes worth increasing the size of track 3 to 30 percent}
+
+\item{equal_axis}{Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.}
 }
 \description{
 Create a Circos plot with up to 3 tracks using points, lines or bars

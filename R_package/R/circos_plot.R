@@ -257,7 +257,48 @@ circos_plot <- function(track_number,
     track2_axis_max <- axis_max
     track3_axis_max <- axis_max
   }
-  else if (equal_axis == FALSE){
+  else if (equal_axis == FALSE && track_number == 1){
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+  }
+  else if (equal_axis == FALSE && track_number == 2){
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 2 axis limits
+    a <- min(track2_data[[lower_ci]])
+    b <- min(track2_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track2_data[[lower_ci]])
+    b <- max(track2_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+  }
+  else if (equal_axis == FALSE && track_number == 3){
     # identify track 1 axis limits
     a <- min(track1_data[[lower_ci]])
     b <- min(track1_data[[upper_ci]])
