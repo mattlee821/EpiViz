@@ -33,6 +33,7 @@
 #' @param track2_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20)
 #' @param track3_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20). It is sometimes worth increasing the size of track 3 to 30 percent
 #' @param equal_axis Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.
+#' @param origin Where do you want your X axis line drawn, e.g. 0 for continuous outcomes and 1 for binary outcomes when using beta and odds ratios respectively. Default is 0
 #'
 #' @export
 #'
@@ -87,7 +88,8 @@ circos_plot <- function(track_number,
                         track1_height = 0.20,
                         track2_height = 0.20,
                         track3_height = 0.20,
-                        equal_axis = FALSE){
+                        equal_axis = FALSE,
+                        origin = 0){
 
   # Default plot paramaters ====
   track1 <- 1 # track 1 is your section header
@@ -95,7 +97,7 @@ circos_plot <- function(track_number,
   track3 <- 3
   track4 <- 4
   x_axis_index <- 1
-  track_axis_reference <- 0
+  track_axis_reference <- origin
   margins <- c(0.5, 0.5, 0.5, 0.5) * 25 # A numerical vector of the form c(bottom, left, top, right) which gives the number of lines of margin to be specified on the four sides of the plot
   start_gap <- 17 # indicates gap at start for Y axis scale, this is a percentage so the larger the number the larger the empty gap
   start_degree <- 90 # starting point of the cirlce in degrees (90 is top)
@@ -257,33 +259,6 @@ circos_plot <- function(track_number,
     track2_axis_max <- axis_max
     track3_axis_max <- axis_max
   }
-  else if (equal_axis == FALSE && track_number == 2){
-    # identify track 1 axis limits
-    a <- min(track1_data[[lower_ci]])
-    b <- min(track1_data[[upper_ci]])
-    axis_min <- min(a, b)
-    axis_min <- round(axis_min, 3)
-    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
-    
-    a <- max(track1_data[[lower_ci]])
-    b <- max(track1_data[[upper_ci]])
-    axis_max <- max(a, b)
-    axis_max <- round(axis_max, 3)
-    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
-    
-    # identify track 2 axis limits
-    a <- min(track2_data[[lower_ci]])
-    b <- min(track2_data[[upper_ci]])
-    axis_min <- min(a, b)
-    axis_min <- round(axis_min, 3)
-    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
-    
-    a <- max(track2_data[[lower_ci]])
-    b <- max(track2_data[[upper_ci]])
-    axis_max <- max(a, b)
-    axis_max <- round(axis_max, 3)
-    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
-  }
   else if (equal_axis == FALSE && track_number == 3){
     # identify track 1 axis limits
     a <- min(track1_data[[lower_ci]])
@@ -323,6 +298,33 @@ circos_plot <- function(track_number,
     axis_max <- max(a, b)
     axis_max <- round(axis_max, 3)
     track3_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+  }
+  else if (equal_axis == FALSE && track_number == 2){
+    # identify track 1 axis limits
+    a <- min(track1_data[[lower_ci]])
+    b <- min(track1_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track1_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track1_data[[lower_ci]])
+    b <- max(track1_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track1_axis_max <- round(axis_max + (axis_max * 0.01), 3)
+    
+    # identify track 2 axis limits
+    a <- min(track2_data[[lower_ci]])
+    b <- min(track2_data[[upper_ci]])
+    axis_min <- min(a, b)
+    axis_min <- round(axis_min, 3)
+    track2_axis_min <- round(axis_min + (axis_min * 0.1), 3)
+    
+    a <- max(track2_data[[lower_ci]])
+    b <- max(track2_data[[upper_ci]])
+    axis_max <- max(a, b)
+    axis_max <- round(axis_max, 3)
+    track2_axis_max <- round(axis_max + (axis_max * 0.01), 3)
   }
   else if (equal_axis == FALSE && track_number == 1){
     # identify track 1 axis limits
