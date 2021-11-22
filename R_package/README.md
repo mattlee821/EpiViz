@@ -54,269 +54,145 @@ library(EpiViz)
 
 ### Step 1: data preperation
 
-Example data is provided with the package and can be assigned with`data
-<- EpiViz::EpiViz_data*` – where `*` is 1-3. The data can be used
-directly in the `circos_plot()` function by assigning it to `track1_data
-= EpiViz::EpiViz_data*`. For more info `?EpiViz::EpiViz_data*`. When
-using your own data, your data frame needs to include:
+Example data is provided with the package and can be assigned
+with`data <- EpiViz::EpiViz_data*` – where `*` is 1-3. The data can be
+used directly in the `circos_plot()` function by assigning it to
+`track1_data = EpiViz::EpiViz_data*`. For more info
+`?EpiViz::EpiViz_data*`. When using your own data, your data frame needs
+to include:
 
-  - label column
-  - effect estimate column
-  - p-value column
-  - lower confidence interval column
-  - upper confidence interval column
-  - section column
+-   label column
+-   effect estimate column
+-   p-value column
+-   lower confidence interval column
+-   upper confidence interval column
+-   section column
 
 <table>
-
 <thead>
-
 <tr>
-
 <th style="text-align:left;">
-
 label
-
 </th>
-
 <th style="text-align:right;">
-
 effect\_extimate
-
 </th>
-
 <th style="text-align:right;">
-
 p\_value
-
 </th>
-
 <th style="text-align:right;">
-
 lower\_confidence\_interval
-
 </th>
-
 <th style="text-align:right;">
-
 upper\_confidence\_interval
-
 </th>
-
 <th style="text-align:left;">
-
 group
-
 </th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
 <td style="text-align:left;">
-
 label1
-
 </td>
-
 <td style="text-align:right;">
-
 0.11
-
 </td>
-
 <td style="text-align:right;">
-
 0.01
-
 </td>
-
 <td style="text-align:right;">
-
 0.10
-
 </td>
-
 <td style="text-align:right;">
-
 0.12
-
 </td>
-
 <td style="text-align:left;">
-
 Group1
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label2
-
 </td>
-
 <td style="text-align:right;">
-
 0.12
-
 </td>
-
 <td style="text-align:right;">
-
 0.02
-
 </td>
-
 <td style="text-align:right;">
-
 0.11
-
 </td>
-
 <td style="text-align:right;">
-
 0.13
-
 </td>
-
 <td style="text-align:left;">
-
 Group1
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label3
-
 </td>
-
 <td style="text-align:right;">
-
 0.13
-
 </td>
-
 <td style="text-align:right;">
-
 0.03
-
 </td>
-
 <td style="text-align:right;">
-
 0.12
-
 </td>
-
 <td style="text-align:right;">
-
 0.14
-
 </td>
-
 <td style="text-align:left;">
-
 Group2
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label4
-
 </td>
-
 <td style="text-align:right;">
-
 0.14
-
 </td>
-
 <td style="text-align:right;">
-
 0.04
-
 </td>
-
 <td style="text-align:right;">
-
 0.13
-
 </td>
-
 <td style="text-align:right;">
-
 0.15
-
 </td>
-
 <td style="text-align:left;">
-
 Group3
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label5
-
 </td>
-
 <td style="text-align:right;">
-
 0.15
-
 </td>
-
 <td style="text-align:right;">
-
 0.05
-
 </td>
-
 <td style="text-align:right;">
-
 0.14
-
 </td>
-
 <td style="text-align:right;">
-
 0.16
-
 </td>
-
 <td style="text-align:left;">
-
 Group3
-
 </td>
-
 </tr>
-
 </tbody>
-
 </table>
 
 #### Section column
@@ -359,10 +235,8 @@ You can have multiple tracks each with differnt styles. Track styles can
 be: `"points"`, `"lines"`, `"bar"`, `"histogram"`. For each track a
 seperate data frame must be provided. The data frames must:
 
-  - have the same columns - names and order
-  - have the same number of rows
-
-<!-- end list -->
+-   have the same columns - names and order
+-   have the same number of rows
 
 ``` r
 circos_plot(track_number = 3,
@@ -450,16 +324,14 @@ than `PDF` will not give a good visualisation.
 ### Colours
 
 The colours are from [i want hue](https://medialab.github.io/iwanthue/)
-and are colourblind friendly. If you want to change them you can edit
-the colours subsection in the `Customisable paramaters` section of the
-`circos_plot.R` script. PLEASE use accessible colours so your plots can
-be interpreted by as many people as possible\! These paramaters start on
-line 103. The colours are in order of track:
+and are colourblind friendly. To change colours use the `colours`
+argument, where the first colour is for the first track, the second
+colour for the second track, and the third colour for the third track.
 
 ``` r
-discrete_palette <- c("#00378f", # track 1 colour
-                      "#ffc067", # track 2 colour
-                      "#894300") # track 3 colour
+colours = c("#00378f", # track 1 colour
+            "#ffc067", # track 2 colour
+            "#894300") # track 3 colour
 ```
 
 ### Ordering sections
@@ -475,147 +347,76 @@ plotted in order of Group1 - Group3. If we plotted based on the order
 column the sections would be plotted Group3 - Group1.
 
 <table>
-
 <thead>
-
 <tr>
-
 <th style="text-align:left;">
-
 label
-
 </th>
-
 <th style="text-align:left;">
-
 group
-
 </th>
-
 <th style="text-align:left;">
-
 order
-
 </th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
 <td style="text-align:left;">
-
 label1
-
 </td>
-
 <td style="text-align:left;">
-
 Group1
-
 </td>
-
 <td style="text-align:left;">
-
 3
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label2
-
 </td>
-
 <td style="text-align:left;">
-
 Group1
-
 </td>
-
 <td style="text-align:left;">
-
 3
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label3
-
 </td>
-
 <td style="text-align:left;">
-
 Group2
-
 </td>
-
 <td style="text-align:left;">
-
 2
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label4
-
 </td>
-
 <td style="text-align:left;">
-
 Group3
-
 </td>
-
 <td style="text-align:left;">
-
 1
-
 </td>
-
 </tr>
-
 <tr>
-
 <td style="text-align:left;">
-
 label5
-
 </td>
-
 <td style="text-align:left;">
-
 Group3
-
 </td>
-
 <td style="text-align:left;">
-
 1
-
 </td>
-
 </tr>
-
 </tbody>
-
 </table>
 
 ``` r
@@ -625,24 +426,15 @@ circos_plot(...
             ...)
 ```
 
-### Axis
-Applicable to 'points' type tracks. By default each track is plotted independently of the others, that is the axis are specific to eahc track. Using `equal_axis = TRUE` you can set all track axis to be the same. The min and max of the $X$ axis will be dictated by the minimum and maximum of teh lower and upper confidence intervals from each track.
-
-``` r
-circos_plot(...
-            equal_axis = TRUE,
-            ...)
-```
-
 ## Session info
 
-    ## R version 3.6.2 (2019-12-12)
-    ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    ## Running under: macOS Catalina 10.15.3
+    ## R version 4.0.5 (2021-03-31)
+    ## Platform: x86_64-apple-darwin17.0 (64-bit)
+    ## Running under: macOS Big Sur 10.16
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
     ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -651,12 +443,11 @@ circos_plot(...
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.3        rstudioapi_0.10   knitr_1.27        xml2_1.2.2       
-    ##  [5] magrittr_1.5      hms_0.5.3         munsell_0.5.0     rvest_0.3.5      
-    ##  [9] viridisLite_0.3.0 colorspace_1.4-1  R6_2.4.1          rlang_0.4.4      
-    ## [13] highr_0.8         stringr_1.4.0     httr_1.4.1        tools_3.6.2      
-    ## [17] webshot_0.5.2     xfun_0.12         htmltools_0.4.0   yaml_2.2.1       
-    ## [21] digest_0.6.24     lifecycle_0.1.0   tibble_2.1.3      crayon_1.3.4     
-    ## [25] kableExtra_1.1.0  readr_1.3.1       vctrs_0.2.3       glue_1.3.1       
-    ## [29] evaluate_0.14     rmarkdown_2.1.1   stringi_1.4.5     compiler_3.6.2   
-    ## [33] pillar_1.4.3      scales_1.1.0      pkgconfig_2.0.3
+    ##  [1] rstudioapi_0.13   knitr_1.36        xml2_1.3.2        magrittr_2.0.1   
+    ##  [5] rvest_1.0.0       munsell_0.5.0     colorspace_2.0-2  viridisLite_0.4.0
+    ##  [9] R6_2.5.1          rlang_0.4.11      fastmap_1.1.0     highr_0.9        
+    ## [13] stringr_1.4.0     httr_1.4.2        tools_4.0.5       webshot_0.5.2    
+    ## [17] xfun_0.26         htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       
+    ## [21] digest_0.6.28     lifecycle_1.0.1   kableExtra_1.3.4  glue_1.4.2       
+    ## [25] evaluate_0.14     rmarkdown_2.11    stringi_1.7.5     compiler_4.0.5   
+    ## [29] scales_1.1.1      svglite_2.0.0

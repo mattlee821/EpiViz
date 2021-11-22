@@ -34,6 +34,7 @@
 #' @param track3_height Size of the track as a percent of the whole circle. Default is 20 percent (0.20). It is sometimes worth increasing the size of track 3 to 30 percent
 #' @param equal_axis Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.
 #' @param origin Where do you want your X axis line drawn, e.g. 0 for continuous outcomes and 1 for binary outcomes when using beta and odds ratios respectively. Default is 0
+#' @param colours list of colours for each track. Use "". 
 #'
 #' @export
 #'
@@ -89,7 +90,8 @@ circos_plot <- function(track_number,
                         track2_height = 0.20,
                         track3_height = 0.20,
                         equal_axis = FALSE,
-                        origin = 0){
+                        origin = 0,
+                        colours = c("#00378f", "#ffc067", "#894300")){
 
   # Default plot paramaters ====
   track1 <- 1 # track 1 is your section header
@@ -106,9 +108,7 @@ circos_plot <- function(track_number,
 
   # Customisable paramaters ====
   ## Colours
-  discrete_palette <- c("#00378f", # track 1 colour
-                        "#ffc067", # track 2 colour
-                        "#894300") # track 3 colour
+  discrete_palette <- colours
 
   ## section header specifics
   section_fill_colour <- "snow2"
