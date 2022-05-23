@@ -75,16 +75,16 @@ to include:
 label
 </th>
 <th style="text-align:right;">
-effect\_extimate
+effect_extimate
 </th>
 <th style="text-align:right;">
-p\_value
+p_value
 </th>
 <th style="text-align:right;">
-lower\_confidence\_interval
+lower_confidence_interval
 </th>
 <th style="text-align:right;">
-upper\_confidence\_interval
+upper_confidence_interval
 </th>
 <th style="text-align:left;">
 group
@@ -219,12 +219,12 @@ circos_plot(track_number = 1, # how many tracks do you want to plot
             track1_data = EpiViz::EpiViz_data1, # what is the dataframe for your first track
             track1_type = "points", # how do you want to plot your first track
             label_column = 1, # whats is the column of your labels
-            section_column = 2, # what is the column of your sections
-            estimate_column = 4, # what is the column of your estimate (beta, OR etc.)
-            pvalue_column = 5, # what is the column of your p-value
+            section_column = 9, # what is the column of your sections
+            estimate_column = 2, # what is the column of your estimate (beta, OR etc.)
+            pvalue_column = 3, # what is the column of your p-value
             pvalue_adjustment = 1, # what do you want your p-value adjustment to be = 0.05/X
-            lower_ci = 7, # what is the column of your lower confidence interval
-            upper_ci = 8) # what is the column of your upper confidence interval
+            lower_ci = 4, # what is the column of your lower confidence interval
+            upper_ci = 5) # what is the column of your upper confidence interval
 ```
 
 <img src="docs/images/1_track_example.svg" width="100%" />
@@ -428,13 +428,13 @@ circos_plot(...
 
 ## Session info
 
-    ## R version 4.0.5 (2021-03-31)
+    ## R version 4.1.2 (2021-11-01)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)
     ## Running under: macOS Big Sur 10.16
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
     ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
@@ -443,11 +443,11 @@ circos_plot(...
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] rstudioapi_0.13   knitr_1.36        xml2_1.3.2        magrittr_2.0.1   
-    ##  [5] rvest_1.0.0       munsell_0.5.0     colorspace_2.0-2  viridisLite_0.4.0
-    ##  [9] R6_2.5.1          rlang_0.4.11      fastmap_1.1.0     highr_0.9        
-    ## [13] stringr_1.4.0     httr_1.4.2        tools_4.0.5       webshot_0.5.2    
-    ## [17] xfun_0.26         htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       
-    ## [21] digest_0.6.28     lifecycle_1.0.1   kableExtra_1.3.4  glue_1.4.2       
-    ## [25] evaluate_0.14     rmarkdown_2.11    stringi_1.7.5     compiler_4.0.5   
-    ## [29] scales_1.1.1      svglite_2.0.0
+    ##  [1] rstudioapi_0.13   knitr_1.39        xml2_1.3.3        magrittr_2.0.3   
+    ##  [5] rvest_1.0.2       munsell_0.5.0     colorspace_2.0-3  viridisLite_0.4.0
+    ##  [9] R6_2.5.1          rlang_1.0.2       fastmap_1.1.0     highr_0.9        
+    ## [13] stringr_1.4.0     httr_1.4.3        tools_4.1.2       webshot_0.5.2    
+    ## [17] xfun_0.30         cli_3.3.0         htmltools_0.5.2   systemfonts_1.0.3
+    ## [21] yaml_2.3.5        digest_0.6.29     lifecycle_1.0.1   kableExtra_1.3.4 
+    ## [25] glue_1.6.2        evaluate_0.15     rmarkdown_2.14    stringi_1.7.6    
+    ## [29] compiler_4.1.2    scales_1.2.0      svglite_2.0.0
