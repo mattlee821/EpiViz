@@ -28,13 +28,18 @@ home_about = function(){
 home_example = function(){
   list(
     div(
-      id = "home_example",
+      id = "home_example", 
       includeMarkdown(file.path("text", "home_example.md")),
-      downloadButton("downloadexampledata1", "Sex combined results"),
-      downloadButton("downloadexampledata2", "Male results"),
-      downloadButton("downloadexampledata3", "Female results"),
-      )
+      downloadButton("downloadexampledata1", "BMI combined"),
+      downloadButton("downloadexampledata2", "BMI Male"),
+      downloadButton("downloadexampledata3", "BMI female"),
+      br(),
+      br(),
+      downloadButton("downloadexampledata4", "WHR combined"),
+      downloadButton("downloadexampledata5", "WHR Male"),
+      downloadButton("downloadexampledata6", "WHR Female"),
     )
+  )
 }
 
 home_footer = function(){
