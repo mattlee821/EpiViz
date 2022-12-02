@@ -18,5 +18,6 @@ measures.
 ### Metabolites
 
 Summary statistics for 123 nuclear magnetic resonance derived
-metabolites were obtained from [Kettunen et al., (2016)](). Only
-sex-combined data were available.
+metabolites were obtained from [Kettunen et al.,
+(2016)](https://www.nature.com/articles/ncomms11122). Only sex-combined
+data were available.
