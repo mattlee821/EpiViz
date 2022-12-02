@@ -1,15 +1,20 @@
 <h3>About</h3>
-<p align="justify"><strong>EpiViz</strong> is a visualisation tool that efficiently produces Circos plots. The tool was designed with large association analyses, particularly metabolomics, in mind. </p>
+<p align="justify"><strong>EpiViz</strong> is a visualisation tool for producing Circos plots. The tool was designed with large epidemiological association analyses in mind, such as those involving metabolomics. </p>
 
+<p>Example circos plots:</p>
 <p align="justify">
 <ul>
-  <li>Example Circos plots are shown on the <i>EpiViz</i> tab </li>
-  <li>Example data can be downloaded from this page and can be used with the app</li>
-  <li> The <i>How to</i> tab provides instructions for using the app</li>
-  <li> Upload your data and create your plot on the <i>Analysis</i> tab.</li>
-  <li> The <i>About</i> tab provides background on Circos plots
+  <li><a href="https://www.mdpi.com/2218-1989/9/9/190">Taylor et al., (2019)</a></li>
+  <li><a href="https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-020-01855-9">Bull et al., (2020)</a></li>
+  <li><a href="https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-021-01939-0">Boss et al., (2021)</a></li>
 </ul>
 </p>
 
-<p align="justify">You can cite <a href = ""><strong>EpiViz</strong></a>, raise isssues and contribute via <a href = "">GitHub</a>. Please get in <a href = "mailto:matthew.lee@bristol.ac.uk">touch</a> with suggestions!</p>
+<p>Citation:</p>
+<p align="justify">
+<ul>
+  <li><a href="https://academic.oup.com/bioinformatics/article/30/19/2811/2422259?login=false">Gu et al., (2014)</a></li>
+  <li>If using the legend function, <a href="https://academic.oup.com/bioinformatics/article/32/18/2847/1743594">Gu et al., (2016)</a></li>
+</ul>
+</p>
 

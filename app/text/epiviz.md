@@ -64,47 +64,7 @@ body {
      style = "width:100%"
      alt = "example circos plot 1">
 
-<!-- Photo Grid -->
-<div class="row"> 
 
-  <!-- Column 1 -->
-  <div class="column">
-  
-  <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-	<img src="../www/gallery/epiviz_example_group.png"
-  alt="Circos plot example" 
-  style="width:100%">
-  </a>
-  
-  </div>
-  
-  <!-- Column 2 -->
-  <div class="column">
-  <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-	<img src="../www/gallery/epiviz_example_subgroup.png"
-  alt="" 
-  style="width:100%">
-  </a>
-  </div> 
-  
-  <!-- Column 3 -->
-  <div class="column">
-  <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-  <img src="../www/gallery/circos_example1.png"
-  alt="example 1" 
-  style="width:100%">
-  </a>
-  </div> 
-  
-  <!-- Column 4 -->
-  <div class="column">
-  <a href = "https://github.com/mattlee821/EpiCircos" target = "_blank">
-  <img src="../www/gallery/circos_example2.png"
-  alt="" 
-  style="width:100%">
-  </a>
-  </div> 
-</div>
 
 </body>
 </html>
