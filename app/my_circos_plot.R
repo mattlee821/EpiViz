@@ -94,17 +94,46 @@ my_circos_plot <- function(track_number,
   label_col <- "black"
   label_cex <- 0.6
   
+  # organise data ====
+  track2_data1 <- data.frame(label = track2_data1[[label_column]],
+                     b = track2_data1[[estimate_column]],
+                     p = track2_data1[[pvalue_column]],
+                     group = as.factor(track2_data1[[section_column]]),
+                     lci = track2_data1[[confidence_interval_lower_column]],
+                     uci = track2_data1[[confidence_interval_upper_column]])
   
+  if(track_number >= 2){
+    track3_data1 <- data.frame(label = track3_data1[[label_column]],
+                       b = track3_data1[[estimate_column]],
+                       p = track3_data1[[pvalue_column]],
+                       group = as.factor(track3_data1[[section_column]]),
+                       lci = track3_data1[[confidence_interval_lower_column]],
+                       uci = track3_data1[[confidence_interval_upper_column]])
+  }
   
+  if(track_number >= 3){
+    track4_data1 <- data.frame(label = track4_data1[[label_column]],
+                       b = track4_data1[[estimate_column]],
+                       p = track4_data1[[pvalue_column]],
+                       group = as.factor(track4_data1[[section_column]]),
+                       lci = track4_data1[[confidence_interval_lower_column]],
+                       uci = track4_data1[[confidence_interval_upper_column]])
+  }
   
+  label_column <- "label"
+  section_column <- "group"
+  estimate_column <- "b"
+  confidence_interval_lower_column <- "lci"
+  confidence_interval_upper_column <- "uci"
+  pvalue_column <- "p"
   
   # 1. Set up - set up the plotting region and prepare the data used for this ====
   
   ## 1.A use the track2_data1 to plot the initial plotting region of the circle
-  data <- track2_data1
-  
+
   ## 1.B prepare the data into a format you want for plotting
   ### order based on metabolite category (section) and alphabetically within that based on name of the metabolite
+  data <- track2_data1
   data <- data[order(data[[section_column]], data[[label_column]]),]
   
   ### add the X column - this is position of values within the track and should be 1:n depedning on number of variables in each section and is based also on individual sections. this will give a number 1-n for each individual metabolite in each section as a position within the section for plotting values.
@@ -127,7 +156,7 @@ my_circos_plot <- function(track_number,
   data <- getaxis(data)
   
   ### add column that codes sections as numbers so that we can add this into the plot (the whole metabolite category name doesnt fit) - these numbers can then be translated in the legend or figure title
-  data$section_numbers = factor(data[[section_column]],
+  data$section_numbers <- factor(data[[section_column]],
                                 labels = 1:nlevels(data[[section_column]]))
   
   ### set gap for axis
@@ -196,10 +225,10 @@ my_circos_plot <- function(track_number,
   ### because we are using the same data as that used to make track 1 we dont need to assign the data again and make paramaters for it
   
   ## 3.A set the axis bounds for the track
-  track2_axis_min <- round(min(track2_data1[[confidence_interval_lower_column]]), 3) 
+  track2_axis_min <- round(min(data[[confidence_interval_lower_column]]), 3) 
   track2_axis_min <- round(track2_axis_min + (track2_axis_min * 0.1), 3)
   
-  track2_axis_max <- round(max(track2_data1[[confidence_interval_upper_column]]), 3)
+  track2_axis_max <- round(max(data[[confidence_interval_upper_column]]), 3)
   track2_axis_max <- round(track2_axis_max - (track2_axis_min * 0.1), 3)
   
   track2_axis_min_half <- round(track2_axis_min/2, 3)
@@ -276,10 +305,10 @@ my_circos_plot <- function(track_number,
     ## 4.A assign the data and set the axis bounds of the track
     data <- track3_data1
     
-    track3_axis_min <- round(min(track3_data1[[confidence_interval_lower_column]]), 3) 
+    track3_axis_min <- round(min(data[[confidence_interval_lower_column]]), 3) 
     track3_axis_min <- round(track3_axis_min + (track3_axis_min * 0.1), 3)
     
-    track3_axis_max <- round(max(track3_data1[[confidence_interval_upper_column]]), 3)
+    track3_axis_max <- round(max(data[[confidence_interval_upper_column]]), 3)
     track3_axis_max <- round(track3_axis_max - (track3_axis_min * 0.1), 3)
     
     track3_axis_min_half <- round(track3_axis_min/2, 3)
@@ -386,10 +415,10 @@ my_circos_plot <- function(track_number,
     ## 5.A assign the data and set the axis bounds of the track
     data <- track4_data1
     
-    track4_axis_min <- round(min(track4_data1[[confidence_interval_lower_column]]), 3) 
+    track4_axis_min <- round(min(data[[confidence_interval_lower_column]]), 3) 
     track4_axis_min <- round(track4_axis_min + (track4_axis_min * 0.1), 3)
     
-    track4_axis_max <- round(max(track4_data1[[confidence_interval_upper_column]]), 3)
+    track4_axis_max <- round(max(data[[confidence_interval_upper_column]]), 3)
     track4_axis_max <- round(track4_axis_max - (track4_axis_min * 0.1), 3)
     
     track4_axis_min_half <- round(track4_axis_min/2, 3)
