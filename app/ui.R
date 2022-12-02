@@ -9,17 +9,15 @@ library(ggplot2)
 library(data.table)
 library(circlize)
 library(dplyr)
-# remotes::install_github("andrewsali/shinycssloaders", ref="8779ff0f0ad32b0731c06067e35fa65d85f66a89")
-# remotes::install_github("andrewsali/shinycssloaders", ref="9565546494f3395a257546312313929ec0bbf968")
-library(shinycssloaders)
 library(stringr)
 library(fs)
 library(rmarkdown)
 library(markdown)
 library(data.table)
 library(wesanderson)
+library(shinycssloaders)
 
-# install complexheatmap from bioconductor - NOT CURRENTLY WORKING
+# install complexheatmap from bioconductor
 library(BiocManager)
 options(repos = BiocManager::repositories())
 library(ComplexHeatmap)
@@ -40,21 +38,16 @@ ui <- navbarPage(
   # EpiViz ====
     tabPanel(
       title = "EpiViz",
-      epiviz()),
-  
-  # HOME ====
-  tabPanel(
-    title = "Home",
-    fluidRow(
-      column(12, title = "", id = "home_home", home_home()),
-      column(4, title = "About", id = "home_about", home_about()),
-      column(4, title = "Example", id = "home_example", home_example()),
-      column(4, title = "", id = "home_footer", home_footer())
-    )),
+      fluidRow(
+        column(12, title = "", id = "home_home", epiviz()),
+        column(4, title = "About", id = "home_about", home_about()),
+        column(4, title = "Example", id = "home_example", home_example()),
+        column(4, title = "", id = "home_footer", home_footer())
+      )),
   
   # HOW TO ====
   tabPanel(
-    title = "How to",
+    title = "how to",
     fluidRow(
       column(4, title = "", id = "how_to_1", how_to_1()),
       column(4, title = "About", id = "how_to_2", how_to_2()),
@@ -63,10 +56,10 @@ ui <- navbarPage(
     
   # ANALYSIS ====
   tabPanel(
-    title = "Analysis",
+    title = "plot",
     tabsetPanel(
       id = 'dataset',
-      ## UPLOAD YOUR DATA ====
+      ## UPLOAD DATA ====
       tabPanel(titlePanel(h5("Data")),
                sidebarLayout(
                  ## > sidebar panel ====
@@ -102,7 +95,21 @@ ui <- navbarPage(
                        "text/csv",
                        "text/comma-separated-values",
                        "text/plain",
-                       ".csv"))),
+                       ".csv")),
+                  
+                   h4("Volcano plot of data:"),
+                   helpText("Select columns to generate a volcano plot."),
+                   
+                   selectInput("beta_column",
+                               "Effect estimate:",
+                               choices="", 
+                               selected = ""),
+                   selectInput("p_column",
+                               "P-value:",
+                               choices="", 
+                               selected = ""),
+                   actionButton("volcanobutton","volcano")),
+                 
                  
                  ## > main panel ====
                  mainPanel(
@@ -247,22 +254,12 @@ ui <- navbarPage(
                    ), # close sidebarPanel() 
                  
                  ## > main panel ====
-                 mainPanel(withSpinner(uiOutput("pdf")))
-                 ) # close sidebarLayout()
+                 mainPanel(withSpinner(uiOutput("plot")))
+               ) # close sidebarLayout()
                ) # close tabPanel()
       ) # cose tabsetPanle()
     ), # close tabPanel
   
-  # ABOUT  ====
-  tabPanel(
-    title = "About",
-    fluidRow(
-      column(4, title = "", id = "about_about", about_about()),
-      column(4, title = "", id = "about_acknowledgements", about_acknowledgements()),
-      column(4, title = "", id = "about_updates", about_updates())
-      ) # close fluidRow()
-    ), # close tabPanel()
-
 
   ## Keep shiny app awake ====
   tags$head(
@@ -285,8 +282,3 @@ ui <- navbarPage(
     ),
   textOutput("")
   )
-
-
-
-
-

@@ -16,30 +16,60 @@ server <- shinyServer(function(input, output, session) {
   # Download example dataset
   output$downloadexampledata1 <- downloadHandler(
     filename = function() {
-      paste0("sex_combined_results.txt")
+      paste0("bmi_combined.txt")
     },
     content = function(file) {
-      file.copy("sex_combined_results.txt", file)
+      file.copy("bmi_combined.txt", file)
     },
     contentType = NA
   )
   
   output$downloadexampledata2 <- downloadHandler(
     filename = function() {
-      paste0("male_results.txt")
+      paste0("bmi_male.txt")
     },
     content = function(file) {
-      file.copy("male_results.txt", file)
+      file.copy("bmi_male.txt", file)
     },
     contentType = NA
   )
   
   output$downloadexampledata3 <- downloadHandler(
     filename = function() {
-      paste0("female_results.txt")
+      paste0("bmi_female.txt")
     },
     content = function(file) {
-      file.copy("female_results.txt", file)
+      file.copy("bmi_female.txt", file)
+    },
+    contentType = NA
+  )
+  
+  output$downloadexampledata4 <- downloadHandler(
+    filename = function() {
+      paste0("whr_combined.txt")
+    },
+    content = function(file) {
+      file.copy("whr_combined.txt", file)
+    },
+    contentType = NA
+  )
+  
+  output$downloadexampledata5 <- downloadHandler(
+    filename = function() {
+      paste0("whr_male.txt")
+    },
+    content = function(file) {
+      file.copy("whr_male.txt", file)
+    },
+    contentType = NA
+  )
+  
+  output$downloadexampledata6 <- downloadHandler(
+    filename = function() {
+      paste0("whr_female.txt")
+    },
+    content = function(file) {
+      file.copy("whr_female.txt", file)
     },
     contentType = NA
   )
@@ -47,7 +77,7 @@ server <- shinyServer(function(input, output, session) {
   
   
   # ANALYSIS ====
-  #  UPLOAD YOUR DATA ====
+  #  UPLOAD DATA ====
   # > sidebar panel ====
   # Read data from multiple .csv/.txt files
   track2_data1 <- eventReactive(input$file1, {
@@ -83,6 +113,20 @@ server <- shinyServer(function(input, output, session) {
       fill = TRUE)
     })
   
+  observeEvent(input$file1, {
+    updateSelectInput(session,
+                      "beta_column",
+                      choices = c("",colnames(track2_data1())))
+    
+    updateSelectInput(session,
+                      "p_column",
+                      choices = c("",colnames(track2_data1())))  
+  }
+  )
+  beta_column_number <- reactive({which(colnames(track2_data1())==input$beta_column)})
+  p_column_number <- reactive({which(colnames(track2_data1())==input$p_column)})
+  
+  
   # > main panel ====
   # >> Track 1 ====
   # Define conditional element to show main panel only when file(s) uploaded
@@ -99,12 +143,12 @@ server <- shinyServer(function(input, output, session) {
     renderText(paste("Total number of columns in uploaded file:", ncol(track2_data1())))
   
   # Render head of imported dataset
-  output$data1 <- renderTable({
-    track2_data1() %>% head
-  })
+  output$data1 <- renderTable(
+    track2_data1()[1:5,], striped = TRUE, options = list(pageLength = 5)
+  )
   
   # Render volcano plot
-  observeEvent(input$file1,
+  observeEvent(input$volcanobutton,
                handlerExpr = {
                  output$volcanoplot1 <- renderPlotly({
                    volcanoplot <- plot_ly(
@@ -112,12 +156,12 @@ server <- shinyServer(function(input, output, session) {
                      type = "scatter",
                      colors = NULL,
                      alpha = NULL,
-                     x = track2_data1()[[2]],
-                     y = -log10(track2_data1()[[3]]),
+                     x = track2_data1()[[beta_column_number()]],
+                     y = -log10(track2_data1()[[p_column_number()]]),
                      text = track2_data1()[[1]],
                      mode = "markers"
                    ) %>%
-                     layout(xaxis = list(title = "effect_estimate"),
+                     layout(xaxis = list(title = "effect estimate"),
                             yaxis = list(title = "-log10(p-value)"))
                  })
                })
@@ -138,12 +182,12 @@ server <- shinyServer(function(input, output, session) {
     renderText(paste("Total number of columns in uploaded file:", ncol(track3_data1())))
   
   # Render head of imported dataset
-  output$data2 <- renderTable({
-    track3_data1() %>% head
-  })
+  output$data2 <- renderTable(
+    track3_data1()[1:5,], striped = TRUE, options = list(pageLength = 5)
+  )
   
   # Render volcano plot
-  observeEvent(input$file2,
+  observeEvent(input$volcanobutton,
                handlerExpr = {
                  output$volcanoplot2 <- renderPlotly({
                    volcanoplot <- plot_ly(
@@ -151,8 +195,8 @@ server <- shinyServer(function(input, output, session) {
                      type = "scatter",
                      colors = NULL,
                      alpha = NULL,
-                     x = track3_data1()[[2]],
-                     y = -log10(track3_data1()[[3]]),
+                     x = track3_data1()[[beta_column_number()]],
+                     y = -log10(track3_data1()[[p_column_number()]]),
                      text = track3_data1()[[1]],
                      mode = "markers"
                    ) %>%
@@ -176,12 +220,12 @@ server <- shinyServer(function(input, output, session) {
     renderText(paste("Total number of columns in uploaded file:", ncol(track4_data1())))
   
   # Render head of imported dataset
-  output$data3 <- renderTable({
-    track4_data1() %>% head
-  })
+  output$data3 <- renderTable(
+    track4_data1()[1:5,], striped = TRUE, options = list(pageLength = 5)
+  )
   
   # Render volcano plot
-  observeEvent(input$file3,
+  observeEvent(input$volcanobutton,
                handlerExpr = {
                  output$volcanoplot3 <- renderPlotly({
                    volcanoplot <- plot_ly(
@@ -189,8 +233,8 @@ server <- shinyServer(function(input, output, session) {
                      type = "scatter",
                      colors = NULL,
                      alpha = NULL,
-                     x = track4_data1()[[2]],
-                     y = -log10(track4_data1()[[3]]),
+                     x = track4_data1()[[beta_column_number()]],
+                     y = -log10(track4_data1()[[p_column_number()]]),
                      text = track4_data1()[[1]],
                      mode = "markers"
                    ) %>%
@@ -245,18 +289,16 @@ server <- shinyServer(function(input, output, session) {
   confidence_interval_lower_column_number <- reactive({which(colnames(track2_data1())==input$confidence_interval_lower_column)})
   confidence_interval_upper_column_number <- reactive({which(colnames(track2_data1())==input$confidence_interval_upper_column)})
   
-  
-  
-  output$pdf <- renderUI({
+  output$plot <- renderUI({
     if(file.exists(outfile)){
-      tags$iframe(src=outfile,style="height:600px; width:100%")}
+      tags$iframe(src = outfile, style = "height:600px; width:100%")}
   })
   
-  outfile <- tempfile("myfile", fileext = ".pdf", tmpdir ="www")
+  outfile <- tempfile("circos_", fileext = ".pdf", tmpdir ="www")
   
   observeEvent(input$circosbutton,
                handlerExpr = {
-                 output$pdf <- renderUI({
+                 output$plot <- renderUI({
                    pdf(outfile, width = 35, height = 35, pointsize = 30)
                    isolate({
                      my_circos_plot(
@@ -280,8 +322,9 @@ server <- shinyServer(function(input, output, session) {
                    })
                    
                    dev.off()
+                   
                    if(file.exists(outfile)){
-                     tags$iframe(src=str_sub(outfile,5),style="height:800px; width:100%")}
+                     tags$iframe(src = str_sub(outfile, 5), style = "height:800px; width:100%")}
                  })
                })
   
