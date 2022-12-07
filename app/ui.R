@@ -159,7 +159,7 @@ ui <- navbarPage(
                ), # close tabPanel()
       
       ## PLOT PARAMETERS ====
-      tabPanel(titlePanel(h5("Plot")),
+      tabPanel(titlePanel(h5("Circos")),
                sidebarLayout(
                  ## > sidebar panel ====
                  sidebarPanel(
