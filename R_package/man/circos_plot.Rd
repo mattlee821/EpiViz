@@ -28,6 +28,7 @@ circos_plot(
   histogram_binsize = 0.01,
   histogram_densityplot = FALSE,
   legend = FALSE,
+  pvalue_legend = FALSE,
   track1_label = NA,
   track2_label = NA,
   track3_label = NA,
@@ -88,6 +89,8 @@ circos_plot(
 
 \item{legend}{Do you want a legend = TRUE or FALSE. FALSE by default}
 
+\item{pvalue_legend}{Do you want a o-value legend icon}
+
 \item{track1_label}{What do you want the label for the first track to be e.g. "Body Mass Index"}
 
 \item{track2_label}{What do you want the label for the first track to be e.g. "Corondary Heart Disease"}
@@ -132,6 +135,7 @@ lines_column = 2,
 lines_type = "o",
 bar_column = 2,
 legend = FALSE,
+pvalue_legend = FALSE
 circle_size = 25)
 
 }
