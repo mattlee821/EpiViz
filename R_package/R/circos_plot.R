@@ -35,7 +35,8 @@
 #' @param equal_axis Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.
 #' @param origin Where do you want your X axis line drawn, e.g. 0 for continuous outcomes and 1 for binary outcomes when using beta and odds ratios respectively. Default is 0
 #' @param colours list of colours for each track. Use "". 
-#'
+#' @param pvalue_legend Do you want a o-value legend icon 
+#' 
 #' @export
 #'
 #' @examples circos_plot(track_number = 3,
@@ -56,43 +57,45 @@
 #' lines_type = "o",
 #' bar_column = 2,
 #' legend = FALSE,
+#' pvalue_legend = FALSE
 #' circle_size = 25)
 #'
 circos_plot <- function(track_number,
-                        track1_data,
-                        track2_data,
-                        track3_data,
-                        track1_type,
-                        track2_type,
-                        track3_type,
-                        label_column,
-                        section_column,
-                        order = TRUE,
-                        order_column,
-                        estimate_column,
-                        pvalue_column,
-                        pvalue_adjustment,
-                        lower_ci,
-                        upper_ci,
-                        lines_column,
-                        lines_type = "o",
-                        bar_column,
-                        histogram_column,
-                        histogram_binsize = 0.01,
-                        histogram_densityplot = FALSE,
-                        legend = FALSE,
-                        track1_label = NA,
-                        track2_label = NA,
-                        track3_label = NA,
-                        pvalue_label = NA,
-                        circle_size = 25,
-                        track1_height = 0.20,
-                        track2_height = 0.20,
-                        track3_height = 0.20,
-                        equal_axis = FALSE,
-                        origin = 0,
-                        colours = c("#00378f", "#ffc067", "#894300")){
-
+                           track1_data,
+                           track2_data,
+                           track3_data,
+                           track1_type,
+                           track2_type,
+                           track3_type,
+                           label_column,
+                           section_column,
+                           order = TRUE,
+                           order_column,
+                           estimate_column,
+                           pvalue_column,
+                           pvalue_adjustment,
+                           lower_ci,
+                           upper_ci,
+                           lines_column,
+                           lines_type = "o",
+                           bar_column,
+                           histogram_column,
+                           histogram_binsize = 0.01,
+                           histogram_densityplot = FALSE,
+                           legend = FALSE,
+                           pvalue_legend = FALSE,
+                           track1_label = NA,
+                           track2_label = NA,
+                           track3_label = NA,
+                           pvalue_label = NA,
+                           circle_size = 25,
+                           track1_height = 0.20,
+                           track2_height = 0.20,
+                           track3_height = 0.20,
+                           equal_axis = FALSE,
+                           origin = 0,
+                           colours = c("#00378f", "#ffc067", "#894300")){
+  
   # Default plot paramaters ====
   track1 <- 1 # track 1 is your section header
   track2 <- 2 # you start plotting your data on track 2
@@ -104,70 +107,70 @@ circos_plot <- function(track_number,
   start_gap <- 17 # indicates gap at start for Y axis scale, this is a percentage so the larger the number the larger the empty gap
   start_degree <- 90 # starting point of the cirlce in degrees (90 is top)
   section_track_height <- 0.10 # size of secton header track as percent of whole circle
-
-
+  
+  
   # Customisable paramaters ====
   ## Colours
   discrete_palette <- colours
-
+  
   ## section header specifics
   section_fill_colour <- "snow2"
   section_text_colour <- "black"
   section_line_colour <- "grey"
   section_line_thickness <- 1.5
   section_line_type <- 1
-
+  
   ## reference lines that go around the tracks
   reference_line_colour <- "deeppink"
   reference_line_thickness <- 1.5
   reference_line_type <- 1
-
+  
   ## point specifics
   point_pch <- 21
-  point_cex <- 1.5
-
+  point_cex <- 1
+  
   point_col1 <- discrete_palette[1]
   point_bg1 <- "white"
   point_col1_sig <- "white"
   point_bg1_sig <- discrete_palette[1]
-
+  
   point_col2 <- discrete_palette[2]
   point_bg2 <- "white"
   point_col2_sig <- "white"
   point_bg2_sig <- discrete_palette[2]
-
+  
   point_col3 <- discrete_palette[3]
   point_bg3 <- "white"
   point_col3_sig <- "white"
   point_bg3_sig <- discrete_palette[3]
-
+  
   ## confidence intervals
   ci_lwd <- 5
   ci_lty <- 1
   ci_col1 <- discrete_palette[1]
   ci_col2 <- discrete_palette[2]
   ci_col3 <- discrete_palette[3]
-
+  
   ## lines specifics
   lines_col1 <- discrete_palette[1]
   lines_col2 <- discrete_palette[2]
   lines_col3 <- discrete_palette[3]
-
+  
   lines_lwd <- 3
   lines_lty <- 1
-
+  
   ## y axis specifics
   y_axis_location <- "left"
   y_axis_tick <- FALSE
   y_axis_tick_length <- 0
-  y_axis_label_cex <- 0.75
-
+  y_axis_label_cex <- 0.5
+  
   ## label specifics
   label_distance <- 1.5 # distance from track 0 to plot labels
   label_col <- "black"
   label_cex <- 0.6
-
-
+  
+  
   # Axis set-up ====
   if (equal_axis == TRUE && track_number == 2){
     # identify track 1 axis limits
@@ -345,7 +348,7 @@ circos_plot <- function(track_number,
   # plot set-up ====
   ## the plot region is set-up based on track1_data
   data <- track1_data
-
+  
   ## 1. organise the data based on section and alphabetically within that based on label
   if (order == TRUE){
     data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -354,41 +357,41 @@ circos_plot <- function(track_number,
     data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
     data <- data[order(data[[section_column]], data[[label_column]]),]
   }
-
+  
   ## 2. add column of positions of where each data point will be in th track - this is position of values within the track and should be 1:n depedning on number of variables in each section and is based also on individual sections. this will give a number 1-n for each individual metabolite in each section as a position within the section for plotting values.
   data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN = seq_along))
-
+  
   ## 3. set parameter - this sets the paramater of the sections of the circos plot so that you can plot within individual sections
   npercat <- as.vector(table(data[[section_column]]))
-
+  
   ## 4. Standardise data$x so that the axis is from 0-1 - this provides for each section an individual x axis
   getaxis <- function(data) {
-
+    
     for (i in 1:nrow(data)) {
-
+      
       data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
       data$ncat[i]<- data$x[i]/data$n[i]
     }
     return(data)
   }
-
+  
   data <- getaxis(data)
-
+  
   ## 5. add column that codes sections as numbers - this will be the label for section headings. This can then be translated in the legend or figure title
   data$section_numbers = factor(data[[section_column]],
                                 labels = 1:nlevels(data[[section_column]]))
-
+  
   ## 6. set gap for axis - spacing between sections. It is 1-n where n is 1 minus the total number of sections - last number indicates gap at start for Y axis scale, this is a percentage so the larger the number the larger the empty gap
   gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+  
   ## 7. clear plotting area
   circlize::circos.clear()
-
+  
   ## 8. initiate blank page to plot on top of
   graphics::par(mar = c(0.6, 0.5, 0.5, 0.5) * circle_size,
-      cex = 0.8,
-      xpd = NA) # A logical value or NA. If FALSE, all plotting is clipped to the plot region, if TRUE, all plotting is clipped to the figure region, and if NA, all plotting is clipped to the device region. See also clip.
-
+                cex = 0.8,
+                xpd = NA) # A logical value or NA. If FALSE, all plotting is clipped to the plot region, if TRUE, all plotting is clipped to the figure region, and if NA, all plotting is clipped to the device region. See also clip.
+  
   ## 9. creat circle paramaters
   circlize::circos.par(cell.padding = c(0, 0.5, 0, 0.5),
                        start.degree = start_degree, # starting point of the circle
@@ -397,12 +400,12 @@ circos_plot <- function(track_number,
                        points.overflow.warning = FALSE, #this dictates whether warnings will pop up if plots are plotted outside of the plotting region (this is to do with teh plotting region not being circular and instead being rectangular) - keep this as FALSE
                        track.height = section_track_height, #height of the section track as percent of whole circle
                        clock.wise = TRUE) #direction to add sections
-
+  
   ## 10. initiate circle
   circlize::circos.initialize(factors = data$section_numbers,
                               xlim = c(0, 1),
                               sector.width = npercat)
-
+  
   ## 11. create and plot section headers
   circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                    track.index = track1, #the track you are plotting
@@ -425,7 +428,7 @@ circos_plot <- function(track_number,
                                                            col = section_text_colour)
                                    },
                                    bg.border = NA) #background border colour
-
+  
   ## 12. add labels
   circlize::circos.trackText(factors = data$section_numbers,
                              track.index = track1, #choose labels based on the track we have just made as you can only plot text once a track has been created
@@ -437,19 +440,19 @@ circos_plot <- function(track_number,
                              adj = c(1, 1),
                              col = label_col,
                              cex = label_cex) #size of the text
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
   # track 1 ====
   ## points ====
   if(track_number >= 1 && track1_type == "points"){
     data <- track1_data
     track.index <- 2
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -458,11 +461,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -470,14 +473,14 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits -- DEPRECATED
     # a <- min(data[[lower_ci]])
     # b <- min(data[[upper_ci]])
@@ -492,32 +495,32 @@ circos_plot <- function(track_number,
     # axis_max <- round(axis_max, 3)
     # axis_max <- round(axis_max + (axis_max * 0.01), 3)
     # axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
       data1 = subset(data, section_numbers == i)
-
+      
       circlize::circos.trackPlotRegion(factors = data1$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
                                        ylim = c(track1_axis_min, track1_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track1_height, #how big is the track as % of circle
-
+                                       
                                        #Set sector background
                                        bg.border = NA,
                                        bg.col = NA,
-
+                                       
                                        #Map values
                                        panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
+                                         
                                          # plot '0' reference line
                                          circlize::circos.lines(x = x,
                                                                 y = y * 0 + track_axis_reference,
                                                                 col = reference_line_colour, #set the 0 line colour to something distinctive
                                                                 lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                                                 lty = reference_line_type)
-
+                                         
                                          # confidence interval
                                          circlize::circos.segments(x0 = data1$ncat, # x coordinates for starting point
                                                                    x1 = data1$ncat, # x coordinates for end point
@@ -527,7 +530,7 @@ circos_plot <- function(track_number,
                                                                    lwd = ci_lwd,
                                                                    lty = ci_lty,
                                                                    sector.index = i)})}
-
+    
     ## 4. layer on top of the confidence intervals the effect estimates
     ### a. points not reaching signfiicance
     circlize::circos.trackPoints(factors = subset(data, data[[pvalue_column]] > pvalue_adjustment)$section_numbers,
@@ -547,7 +550,7 @@ circos_plot <- function(track_number,
                                  pch = point_pch,
                                  col = point_col1_sig,
                                  bg = point_bg1_sig)
-
+    
     ## 5. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -556,13 +559,13 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
+  
+  
   ## lines ====
   if(track_number >= 1 && track1_type == "lines"){
     data <- track1_data
     track.index <- 2
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -571,11 +574,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -583,23 +586,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[lines_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[lines_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -607,30 +610,30 @@ circos_plot <- function(track_number,
                                      y = data[[lines_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track1_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col1,
                                                               lwd = lines_lwd,
                                                               lty = lines_lty,
                                                               type = lines_type)
-
+                                       
                                        # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -639,14 +642,14 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
+  
+  
+  
   ## barplot ====
   if(track_number >= 1 && track1_type == "bar"){
     data <- track1_data
     track.index <- 2
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -655,11 +658,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -667,18 +670,18 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[bar_column]]), 3)
     axis_max <- round(max(data[[bar_column]]), 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -686,15 +689,15 @@ circos_plot <- function(track_number,
                                      y = data[[bar_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track1_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col1,
@@ -704,16 +707,16 @@ circos_plot <- function(track_number,
                                                               area = T,
                                                               border = "White",
                                                               baseline = "bottom")
-
-
+                                       
+                                       
                                        # # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -722,15 +725,15 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
-
+  
+  
+  
+  
   ## histogram ====
   if(track_number >= 1 && track1_type == "histogram"){
     data <- track1_data
     track.index <- 2
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -739,11 +742,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -751,23 +754,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[histogram_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[histogram_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackHist(factors = data$section_numbers,
                                x = data[[histogram_column]],
@@ -778,7 +781,7 @@ circos_plot <- function(track_number,
                                bg.border = NA,
                                draw.density = histogram_densityplot,
                                bin.size = histogram_binsize)
-
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -786,16 +789,16 @@ circos_plot <- function(track_number,
                            at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
-
-    }
-
-
+    
+  }
+  
+  
   # track 2 ====
   ## points ====
   if(track_number >= 2 && track2_type == "points"){
     data <- track2_data
     track.index <- 3
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -804,11 +807,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -816,14 +819,14 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits -- DEPRECATED
     # a <- min(data[[lower_ci]])
     # b <- min(data[[upper_ci]])
@@ -838,32 +841,32 @@ circos_plot <- function(track_number,
     # axis_max <- round(axis_max, 3)
     # axis_max <- round(axis_max + (axis_max * 0.01), 3)
     # axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
       data1 = subset(data, section_numbers == i)
-
+      
       circlize::circos.trackPlotRegion(factors = data1$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
                                        ylim = c(track2_axis_min, track2_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track2_height, #how big is the track as % of circle
-
+                                       
                                        #Set sector background
                                        bg.border = NA,
                                        bg.col = NA,
-
+                                       
                                        #Map values
                                        panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
+                                         
                                          # plot '0' reference line
                                          circlize::circos.lines(x = x,
                                                                 y = y * 0 + track_axis_reference,
                                                                 col = reference_line_colour, #set the 0 line colour to something distinctive
                                                                 lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                                                 lty = reference_line_type)
-
+                                         
                                          # confidence interval
                                          circlize::circos.segments(x0 = data1$ncat, # x coordinates for starting point
                                                                    x1 = data1$ncat, # x coordinates for end point
@@ -873,7 +876,7 @@ circos_plot <- function(track_number,
                                                                    lwd = ci_lwd,
                                                                    lty = ci_lty,
                                                                    sector.index = i)})}
-
+    
     ## 4. layer on top of the confidence intervals the effect estimates
     ### a. points not reaching signfiicance
     circlize::circos.trackPoints(factors = subset(data, data[[pvalue_column]] > pvalue_adjustment)$section_numbers,
@@ -893,7 +896,7 @@ circos_plot <- function(track_number,
                                  pch = point_pch,
                                  col = point_col2_sig,
                                  bg = point_bg2_sig)
-
+    
     ## 5. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -902,14 +905,14 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
+  
+  
+  
   ## lines ====
   if(track_number >= 2 && track2_type == "lines"){
     data <- track2_data
     track.index <- 3
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -918,11 +921,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -930,23 +933,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[lines_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[lines_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -954,30 +957,30 @@ circos_plot <- function(track_number,
                                      y = data[[lines_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track2_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col2,
                                                               lwd = lines_lwd,
                                                               lty = lines_lty,
                                                               type = lines_type)
-
+                                       
                                        # # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -986,16 +989,16 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
-
-
+  
+  
+  
+  
+  
   ## barplot ====
   if(track_number >= 2 && track2_type == "bar"){
     data <- track1_data
     track.index <- 3
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1004,11 +1007,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1016,18 +1019,18 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[bar_column]]), 3)
     axis_max <- round(max(data[[bar_column]]), 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -1035,15 +1038,15 @@ circos_plot <- function(track_number,
                                      y = data[[bar_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track2_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col2,
@@ -1053,16 +1056,16 @@ circos_plot <- function(track_number,
                                                               area = T,
                                                               border = "White",
                                                               baseline = "bottom")
-
-
+                                       
+                                       
                                        # # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1071,16 +1074,16 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
-
-
+  
+  
+  
+  
+  
   ## histogram ====
   if(track_number >= 2 && track2_type == "histogram"){
     data <- track2_data
     track.index <- 3
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1089,11 +1092,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1101,23 +1104,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[histogram_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[histogram_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackHist(factors = data$section_numbers,
                                x = data[[histogram_column]],
@@ -1128,7 +1131,7 @@ circos_plot <- function(track_number,
                                bg.border = NA,
                                draw.density = histogram_densityplot,
                                bin.size = histogram_binsize)
-
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1136,17 +1139,17 @@ circos_plot <- function(track_number,
                            at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
-
+    
   }
-
-
-
+  
+  
+  
   # track 3 ====
   ## points ====
   if(track_number >= 3 && track3_type == "points"){
     data <- track3_data
     track.index <- 4
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1155,11 +1158,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1167,14 +1170,14 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits -- DEPRECATED
     # a <- min(data[[lower_ci]])
     # b <- min(data[[upper_ci]])
@@ -1189,32 +1192,32 @@ circos_plot <- function(track_number,
     # axis_max <- round(axis_max, 3)
     # axis_max <- round(axis_max + (axis_max * 0.01), 3)
     # axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     for(i in 1:nlevels(data$section_numbers)){
       data1 = subset(data, section_numbers == i)
-
+      
       circlize::circos.trackPlotRegion(factors = data1$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                        track.index = track.index,
                                        x = data1$ncat, #set this as ncat as ncat dictates the location of the variable you want to plot within each section and within the circle as a whole
                                        y = data1[[estimate_column]], #variable you want to plot
                                        ylim = c(track3_axis_min, track3_axis_max), #co-ordinates of the Y axis of the track
                                        track.height = track3_height, #how big is the track as % of circle
-
+                                       
                                        #Set sector background
                                        bg.border = NA,
                                        bg.col = NA,
-
+                                       
                                        #Map values
                                        panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
+                                         
                                          # plot '0' reference line
                                          circlize::circos.lines(x = x,
                                                                 y = y * 0 + track_axis_reference,
                                                                 col = reference_line_colour, #set the 0 line colour to something distinctive
                                                                 lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                                                 lty = reference_line_type)
-
+                                         
                                          # confidence interval
                                          circlize::circos.segments(x0 = data1$ncat, # x coordinates for starting point
                                                                    x1 = data1$ncat, # x coordinates for end point
@@ -1224,7 +1227,7 @@ circos_plot <- function(track_number,
                                                                    lwd = ci_lwd,
                                                                    lty = ci_lty,
                                                                    sector.index = i)})}
-
+    
     ## 4. layer on top of the confidence intervals the effect estimates
     ### a. points not reaching signfiicance
     circlize::circos.trackPoints(factors = subset(data, data[[pvalue_column]] > pvalue_adjustment)$section_numbers,
@@ -1244,7 +1247,7 @@ circos_plot <- function(track_number,
                                  pch = point_pch,
                                  col = point_col3_sig,
                                  bg = point_bg3_sig)
-
+    
     ## 5. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1253,14 +1256,14 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
+  
+  
+  
   ## lines ====
   if(track_number >= 3 && track3_type == "lines"){
     data <- track3_data
     track.index <- 4
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1269,11 +1272,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1281,23 +1284,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[lines_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[lines_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -1305,30 +1308,30 @@ circos_plot <- function(track_number,
                                      y = data[[lines_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track3_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col3,
                                                               lwd = lines_lwd,
                                                               lty = lines_lty,
                                                               type = lines_type)
-
+                                       
                                        # # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1337,17 +1340,17 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
   ## barplot ====
   if(track_number >= 3 && track3_type == "bar"){
     data <- track1_data
     track.index <- 4
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1356,11 +1359,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1368,18 +1371,18 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[bar_column]]), 3)
     axis_max <- round(max(data[[bar_column]]), 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackPlotRegion(factors = data$section_numbers, #we plot the first region based on the column in our data set which we creat the sections from
                                      track.index = track.index,
@@ -1387,15 +1390,15 @@ circos_plot <- function(track_number,
                                      y = data[[bar_column]], #variable you want to plot
                                      ylim = c(axis_min, axis_max), #co-ordinates of the Y axis of the track
                                      track.height = track3_height, #how big is the track as % of circle
-
+                                     
                                      #Set sector background
                                      bg.border = NA,
                                      bg.col = NA,
-
+                                     
                                      #Map values
                                      panel.fun = function(x, y) { #this sets x and y as the above defined variables for the following lines of code
-
-
+                                       
+                                       
                                        circlize::circos.lines(x = x,
                                                               y = y,
                                                               col = lines_col3,
@@ -1405,16 +1408,16 @@ circos_plot <- function(track_number,
                                                               area = T,
                                                               border = "White",
                                                               baseline = "bottom")
-
-
+                                       
+                                       
                                        # # plot '0' reference line
                                        # circlize::circos.lines(x = x,
                                        #                        y = y * 0 + track_axis_reference,
                                        #                        col = reference_line_colour, #set the 0 line colour to something distinctive
                                        #                        lwd = reference_line_thickness, #set the thickness of the line so it's a bit smaller than your point (looks better)
                                        #                        lty = reference_line_type)
-                                       })
-
+                                     })
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1423,18 +1426,18 @@ circos_plot <- function(track_number,
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
   }
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
   ## histogram ====
   if(track_number >= 3 && track3_type == "histogram"){
     data <- track3_data
     track.index <- 4
-
+    
     ## 1. prepare data
     if (order == TRUE){
       data <- data[order(data[[section_column]], data[[label_column]]),]
@@ -1443,11 +1446,11 @@ circos_plot <- function(track_number,
       data[[section_column]] <- stats::reorder(data[[section_column]], data[[order_column]])
       data <- data[order(data[[section_column]], data[[label_column]]),]
     }
-
+    
     data$x <- with(data, ave(seq_along(data[[section_column]]), data[[section_column]], FUN=seq_along))
-
+    
     npercat <- as.vector(table(data[[section_column]]))
-
+    
     getaxis <- function(data) {
       for (i in 1:nrow(data)) {
         data$n[i]<-as.numeric(nrow(subset(data, data[[section_column]] == data[[section_column]][i])))
@@ -1455,23 +1458,23 @@ circos_plot <- function(track_number,
       }
       return(data)
     }
-
+    
     data <- getaxis(data)
-
+    
     data$section_numbers = factor(data[[section_column]],
                                   labels = 1:nlevels(data[[section_column]]))
-
+    
     gap = c(rep(1, nlevels(data[[section_column]])-1), start_gap)
-
+    
     ## 2. set axis limits
     axis_min <- round(min(data[[histogram_column]]), 3)
     axis_min <- round(axis_min + (axis_min * 0.1), 3)
     axis_min_half <- round(axis_min/2, 3)
-
+    
     axis_max <- round(max(data[[histogram_column]]), 3)
     axis_max <- round(axis_max + (axis_max * 0.1), 3)
     axis_max_half <- round(axis_max/2, 3)
-
+    
     ## 3. create the track and plot the confidence intervals
     circlize::circos.trackHist(factors = data$section_numbers,
                                x = data[[histogram_column]],
@@ -1482,7 +1485,7 @@ circos_plot <- function(track_number,
                                bg.border = NA,
                                draw.density = histogram_densityplot,
                                bin.size = histogram_binsize)
-
+    
     ## 4. add axis labels
     circlize::circos.yaxis(side = y_axis_location,
                            sector.index = x_axis_index, #the sector this is plotted in
@@ -1490,17 +1493,17 @@ circos_plot <- function(track_number,
                            at = c(axis_min,  track_axis_reference,  axis_max), #location on the y axis as well as the name of the label
                            tick = y_axis_tick, tick.length = y_axis_tick_length,
                            labels.cex = y_axis_label_cex)
-
+    
   }
-
-
-
+  
+  
+  
   # this is the end of the plotting aspect of the script ====
   # Legend ====
-
+  
   ## 1. Assign the legend points
   if(legend == TRUE && track_number == 1){
-
+    
     legend1 <- ComplexHeatmap::Legend(at = c(track1_label),
                                       labels_gp = grid::gpar(fontsize = 15),
                                       ncol = 1,
@@ -1513,10 +1516,10 @@ circos_plot <- function(track_number,
                                       grid_height	= grid::unit(15, "mm"),
                                       grid_width = grid::unit(15, "mm"),
                                       direction = "vertical")}
-
+  
   ## 6.A2 - Assign the legend points
   if(legend == TRUE && track_number >= 2){
-
+    
     legend1 <- ComplexHeatmap::Legend(at = c(track1_label, track2_label),
                                       labels_gp = grid::gpar(fontsize = 15),
                                       ncol = 1,
@@ -1529,10 +1532,10 @@ circos_plot <- function(track_number,
                                       grid_height	= grid::unit(15, "mm"),
                                       grid_width = grid::unit(15, "mm"),
                                       direction = "vertical")}
-
+  
   ## 6.A3 - Assign the legend points
   if(legend == TRUE && track_number >= 3){
-
+    
     legend1 <- ComplexHeatmap::Legend(at = c(track1_label, track2_label, track3_label),
                                       labels_gp = grid::gpar(fontsize = 15),
                                       ncol = 1,
@@ -1545,10 +1548,10 @@ circos_plot <- function(track_number,
                                       grid_height	= grid::unit(15, "mm"),
                                       grid_width = grid::unit(15, "mm"),
                                       direction = "vertical")}
-
+  
   ## 6.B - Assign Pvalue legend point
-  if(legend == TRUE){
-
+  if(legend == TRUE && pvalue_legend == TRUE){
+    
     legend2 <- ComplexHeatmap::Legend(at = pvalue_label, # breaks, can be wither numeric or character
                                       labels_gp = grid::gpar(fontsize = 15),
                                       ncol = 1,
@@ -1561,8 +1564,8 @@ circos_plot <- function(track_number,
                                       grid_height	= grid::unit(15, "mm"),
                                       grid_width = grid::unit(15, "mm"),
                                       direction = "vertical")
-
-    ## 6.C - Assign legend section labelling
+    
+    ## legend section labelling
     names <- levels(as.factor(data[[section_column]]))
     names <- paste(1:nlevels(data[[section_column]]), names, sep=". ")
     legend3 <- ComplexHeatmap::Legend(at = names,
@@ -1576,13 +1579,13 @@ circos_plot <- function(track_number,
                                       grid_height	= grid::unit(15, "mm"),
                                       grid_width = grid::unit(10, "mm"),
                                       direction = "horizontal")
-
+    
     ## 6.D - Pack lagend together
     legend4 <- ComplexHeatmap::packLegend(legend1, legend2, direction = "vertical", gap = grid::unit(0, "mm"))
     legend <- ComplexHeatmap::packLegend(legend4, legend3, direction = "horizontal", gap = grid::unit(0, "mm"))
     legend_height <- legend@grob[["vp"]][["height"]]
     legend_width <- legend@grob[["vp"]][["width"]]
-
+    
     # ## 6.E - Layer legend ontop of plot
     grid::pushViewport(grid::viewport(x = grid::unit(0.5, "npc"),
                                       y = grid::unit(0.08, "npc"),
@@ -1591,7 +1594,38 @@ circos_plot <- function(track_number,
                                       just = c("center", "top")))
     grid::grid.draw(legend)
     grid::upViewport()}
-
-
-  }
+  
+  ## 6.B - Assign Pvalue legend point
+  if(legend == TRUE && pvalue_legend == FALSE){
+    ## legend section labelling
+    names <- levels(as.factor(data[[section_column]]))
+    names <- paste(1:nlevels(data[[section_column]]), names, sep=". ")
+    legend3 <- ComplexHeatmap::Legend(at = names,
+                                      labels_gp = grid::gpar(fontsize = 15),
+                                      nrow = 4,
+                                      ncol = 7,
+                                      border = NA, # color of legend borders, also for the ticks in the continuous legend
+                                      background = NA, # background colors
+                                      legend_gp = grid::gpar(col = c("black")), # graphic parameters for the legend
+                                      size = grid::unit(15, "mm"), # size of points
+                                      grid_height	= grid::unit(15, "mm"),
+                                      grid_width = grid::unit(10, "mm"),
+                                      direction = "horizontal")
+    
+    ## 6.D - Pack lagend together
+    legend <- ComplexHeatmap::packLegend(legend1, legend3, direction = "horizontal", gap = grid::unit(0, "mm"))
+    legend_height <- legend@grob[["vp"]][["height"]]
+    legend_width <- legend@grob[["vp"]][["width"]]
+    
+    # ## 6.E - Layer legend ontop of plot
+    grid::pushViewport(grid::viewport(x = grid::unit(0.5, "npc"),
+                                      y = grid::unit(0.08, "npc"),
+                                      width = legend_width,
+                                      height = legend_height,
+                                      just = c("center", "top")))
+    grid::grid.draw(legend)
+    grid::upViewport()}
+  
+  
+}
 
