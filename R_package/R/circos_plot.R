@@ -35,7 +35,7 @@
 #' @param equal_axis Do you want your tracks to share the same axis (Defalut = FALSE), if TRUE it will use the minimmum and maximum from the upper and lower confidence intervals to calculate the axis for each track. This ONLY applies to 'points' all other plot types are independent of each track.
 #' @param origin Where do you want your X axis line drawn, e.g. 0 for continuous outcomes and 1 for binary outcomes when using beta and odds ratios respectively. Default is 0
 #' @param colours list of colours for each track. Use "". 
-#' @param pvalue_legend Do you want a o-value legend icon 
+#' @param pvalue_legend Do you want a p-value legend icon (defalut = FALSE)
 #' 
 #' @export
 #'
@@ -57,7 +57,7 @@
 #' lines_type = "o",
 #' bar_column = 2,
 #' legend = FALSE,
-#' pvalue_legend = FALSE
+#' pvalue_legend = FALSE,
 #' circle_size = 25)
 #'
 circos_plot <- function(track_number,
