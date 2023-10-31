@@ -42,6 +42,12 @@ you should try visualising your data using forest plots -
 and `forest_plot_1_to_many()` from
 [`TwoSampleMR`](https://mrcieu.github.io/TwoSampleMR/articles/perform_mr.html#to-many-forest-plot).
 
+## Examples
+
+Luo, S., Lam, H.S., Chan, Y.H. et al. Assessing the safety of lipid-modifying medications among Chinese adolescents: a drug-target Mendelian randomization study. BMC Med 21, 410 (2023). [https://doi.org/10.1186/s12916-023-03115-y](https://doi.org/10.1186/s12916-023-03115-y)
+
+Bos, M.M., Goulding, N.J., Lee, M.A. et al. Investigating the relationships between unfavourable habitual sleep and metabolomic traits: evidence from multi-cohort multivariable regression and Mendelian randomization analyses. BMC Med 19, 69 (2021). [https://doi.org/10.1186/s12916-021-01939-0](https://doi.org/10.1186/s12916-021-01939-0)
+
 ## Citation
 
 **Please cite the web application and `R` package as follows:**
