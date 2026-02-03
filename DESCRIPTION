@@ -1,7 +1,7 @@
 Package: EpiViz
 Type: Package
 Title: EpiViz
-Version: 0.1
+Version: 0.2.0
 Author: person("Matthew", "Lee", email = "matthew.lee@bristol.ac.uk", role = c("aut", "cre"))
 Maintainer: Matthew Lee <matthew.lee@bristol.ac.uk>
 Description: An implementation of Circos plots for epidemiologists in R. It takes the Circlize package and adapts it for use by epidemiologists.
