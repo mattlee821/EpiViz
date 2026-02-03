@@ -1,0 +1,39 @@
+# EpiViz: Circos plots for epidemiologists
+
+EpiViz is an R package and [Web
+application](https://mattlee.shinyapps.io/EpiViz/) designed to
+streamline and enable the efficient creation of Circos plots for
+epidemiological data.
+
+Circular layouts provide a unique way to visualize large amounts of
+information, allowing researchers to observe patterns across multiple
+categories and datasets simultaneously.
+
+![](reference/figures/annotated_circos_plot2.png)
+
+# Package index
+
+## Main Plotting Function
+
+- [`circos_plot()`](https://mattlee821.github.io/EpiViz/reference/circos_plot.md)
+  : Create a Circos plot with up to 3 tracks using points, lines or bars
+
+## Built-in Data
+
+- [`EpiViz_data1`](https://mattlee821.github.io/EpiViz/reference/EpiViz_data1.md)
+  : Example data: Simulated epidemiology results for track 1
+- [`EpiViz_data2`](https://mattlee821.github.io/EpiViz/reference/EpiViz_data2.md)
+  : Example data: Simulated epidemiology results for track 2
+- [`EpiViz_data3`](https://mattlee821.github.io/EpiViz/reference/EpiViz_data3.md)
+  : Example data: Simulated epidemiology results for track 3
+
+# Articles
+
+### All vignettes
+
+- [About](https://mattlee821.github.io/EpiViz/articles/about.md):
+- [3. Extras](https://mattlee821.github.io/EpiViz/articles/extra.md):
+- [1.
+  Installation](https://mattlee821.github.io/EpiViz/articles/install.md):
+- [2. Creating
+  plots](https://mattlee821.github.io/EpiViz/articles/plot.md):
