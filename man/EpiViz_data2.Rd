@@ -5,7 +5,17 @@
 \alias{EpiViz_data2}
 \title{Example data: Simulated epidemiology results for track 2}
 \format{
-
+A data frame with 120 rows and 8 variables.
+\describe{
+  \item{label}{Variable names}
+  \item{class}{Greater category/grouping}
+  \item{subgroup}{Minor category/grouping}
+  \item{beta}{Effect estimate}
+  \item{se}{Standard error}
+  \item{pvalue}{P-value}
+  \item{lower_confidence_interval}{Lower 95\% confidence interval bound}
+  \item{upper_confidence_interval}{Upper 95\% confidence interval bound}
+}
 }
 \usage{
 EpiViz_data2
