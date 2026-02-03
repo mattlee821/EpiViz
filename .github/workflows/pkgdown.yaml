@@ -27,21 +27,13 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-
-      - name: Install dependencies
-        run: |
-          install.packages(c("remotes", "pkgdown", "rcmdcheck"))
-          remotes::install_deps(".", dependencies = TRUE)
-          remotes::install_local(".")
-        shell: Rscript {0}
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, any::rcmdcheck
+          needs: website
 
       - name: Build site
-        run: |
-          pkgdown::build_site(".")
+        run: pkgdown::build_site_github(install = FALSE)
         shell: Rscript {0}
 
       - name: Deploy to GitHub Pages
