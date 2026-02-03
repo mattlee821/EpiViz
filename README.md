@@ -1,10 +1,7 @@
 # `EpiViz`: an implementation of Circos plots for epidemiologists
 
-[![DOI](https://zenodo.org/badge/238912321.svg)](https://zenodo.org/badge/latestdoi/238912321)
 
 Circos plots enable visualisation of large amounts of data but can be cumbersome to produce. `EpiViz` is intended to streamline and enable the efficient creation of Circos plots for a range of data typicaly used by epidemiologists.
-
-`EpiViz` was designed with metabolite association analyses in mind. These analyses involve hundreds of metabolites which can be grouped together in different combinations. Of particular interest in these studies is how groups of metabolites behave rather than individual metabolites. In this instance we use the sections of the Circos plot to plot individual groups of metabolites and look at the overall picture for that group of metabolites.
 
 The `R` package builds on the [`Circlize`](https://github.com/jokergoo/circlize) and [`ComplexHeatmap`](https://github.com/jokergoo/ComplexHeatmap) `R` packages to make prodcuing Circos plots quicker and easier for reserachers.
 
@@ -17,8 +14,6 @@ Luo, S., Lam, H.S., Chan, Y.H. et al. Assessing the safety of lipid-modifying me
 Bos, M.M., Goulding, N.J., Lee, M.A. et al. Investigating the relationships between unfavourable habitual sleep and metabolomic traits: evidence from multi-cohort multivariable regression and Mendelian randomization analyses. BMC Med 19, 69 (2021). [https://doi.org/10.1186/s12916-021-01939-0](https://doi.org/10.1186/s12916-021-01939-0)
 
 ## Citation
-
-**Please cite the `R` package as follows:**
 
 Lee M. A, Mahmoud O, Hughes D, Wade K. H, Corbin L. J, McGuinness L. J, Timpson N. J. Epiviz: an implementation of Circos plots for epidemiologists. 2020. <https://github.com/mattlee821/EpiViz>
 
