@@ -33,7 +33,7 @@ jobs:
           needs: website
 
       - name: Build site
-        run: pkgdown::build_site_github(install = FALSE)
+        run: pkgdown::build_site(install = FALSE)
         shell: Rscript {0}
 
       - name: Deploy to GitHub Pages
