@@ -1,0 +1,28 @@
+Package: EpiViz
+Type: Package
+Title: EpiViz
+Version: 0.1
+Author: person("Matthew", "Lee", email = "matthew.lee@bristol.ac.uk", role = c("aut", "cre"))
+Maintainer: Matthew Lee <matthew.lee@bristol.ac.uk>
+Description: An implementation of Circos plots for epidemiologists in R. It takes the Circlize package and adapts it for use by epidemiologists.
+    Circos plots provide an informative way of plotting greater than 50 plotting points. A legend can be plotted automatically and customised.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports:
+    circlize (>= 0.4.6),
+    ComplexHeatmap (>= 1.20.0),
+    grid,
+    stats
+VignetteBuilder: knitr
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+Depends: 
+    R (>= 3.5),
+    graphics,
+    grDevices
+BugReports: https://github.com/mattlee821/EpiViz/issues
+URL: https://github.com/mattlee821/EpiViz
+RoxygenNote: 7.3.3

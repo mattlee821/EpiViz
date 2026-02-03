@@ -1,0 +1,34 @@
+url: https://mattlee821.github.io/EpiViz/
+template:
+  bootstrap: 5
+  lightswitch: true
+
+destination: docs
+
+navbar:
+  structure:
+    left:  [home, about, reference, guide]
+    right: [github]
+  components:
+    about:
+      text: About
+      href: articles/about.html
+    guide:
+      text: Guide
+      menu:
+        - text: "1. Install"
+          href: articles/install.html
+        - text: "2. Plot"
+          href: articles/plot.html
+        - text: "3. Extra"
+          href: articles/extra.html
+
+reference:
+  - title: Main Plotting Function
+    contents:
+      - circos_plot
+  - title: Built-in Data
+    contents:
+      - EpiViz_data1
+      - EpiViz_data2
+      - EpiViz_data3

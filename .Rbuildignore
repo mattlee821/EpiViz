@@ -1,0 +1,15 @@
+^README_cache$
+^data-raw$
+^docs$
+^other$
+\.DS_Store$
+^figures$
+^EpiViz\.Rcheck$
+^EpiViz_.*\.tar\.gz$
+^EpiViz\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^pkgdown$
+^temp\.svg$
+^Rplots\.pdf$
+^index\.md$
